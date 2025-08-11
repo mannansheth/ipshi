@@ -1,0 +1,651 @@
+.starry-story-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+  background: #000;
+}
+
+.back-button {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-button:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateX(-3px);
+}
+
+.story-panel {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Panel 1: Introduction */
+.panel-intro {
+  background: linear-gradient(180deg, #000c78 0%, #000000 100%);
+  text-align: center;
+}
+
+.intro-text {
+  z-index: 2;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.story-title {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  animation: fadeInUp 2s ease-out;
+}
+
+.story-date {
+  font-size: 1.2rem;
+  color: #ffd700;
+  margin-bottom: 2rem;
+  font-family: "Courier New", monospace;
+  animation: fadeInUp 2s ease-out 0.5s both;
+}
+
+.story-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  max-width: 300px;
+  animation: fadeInUp 2s ease-out 1s both;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom:-5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.scroll-arrow {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  animation: bounce 2s infinite;
+}
+
+/* Panel 2: Sky Image */
+.panel-sky {
+  background: #000;
+  justify-content: flex-end;
+  padding-bottom: 4rem;
+}
+
+.sky-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.sky-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.sky-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.panel-content {
+  z-index: 2;
+  position: relative;
+  text-align: center;
+  max-width: 350px;
+}
+
+.panel-title {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.panel-text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+/* Panel 3: Leo Constellation */
+.panel-leo {
+  background: #000;
+  cursor: pointer;
+  justify-content: flex-end;
+  padding-bottom: 4rem;
+}
+
+.constellation-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.constellation-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.leo-constellation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+}
+
+.constellation-svg {
+  width: 100%;
+  height: 100%;
+  animation: fadeIn 1s ease-out;
+}
+
+.constellation-group {
+  animation: twinkle 3s ease-in-out infinite;
+}
+ @keyframes lineAnimation {
+  0% {
+    filter:brightness(25);
+    opacity:0.5;
+  }
+  50% {
+    filter:brightness(50);
+    opacity: 1;
+  }
+  100% {
+    filter:brightness(1);
+    opacity:0.8;
+  }
+ }
+.constellation-lines line {
+  /* animation: fadeIn 0.8s ease; */
+  animation: lineAnimation 5s ease ;
+}
+.tap-hint {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #ffd700;
+  animation: pulse 2s infinite;
+}
+
+/* Panel 4: Moon Phase */
+.panel-moon {
+  background: #000;
+  cursor: pointer;
+  justify-content: flex-end;
+  padding-bottom: 4rem;
+}
+
+.moon-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.moon-phase {
+  position: relative;
+  transition: all 0.8s ease;
+}
+
+.moon-image {
+  width:160px;
+  mix-blend-mode: color-dodge;
+  height:120px;
+  opacity:0;
+  border-radius:100%;
+  transition: all 2s ease;
+}
+
+.moon-phase.revealed .moon-image {
+  transform: scale(1.5);
+  margin-bottom:30px;
+  opacity:1;
+  background:transparent;
+}
+
+/* .moon-glow {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  animation: moonGlow 3s ease-in-out infinite;
+} */
+
+/* Panel 5: Finale */
+.panel-finale {
+  background: #000;
+  cursor: pointer;
+  position: relative;
+}
+
+.finale-sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.finale-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.shooting-star-container {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  z-index: 2;
+}x
+
+.shooting-star {
+  /* width: 30px;
+  height: 10px; */
+  width:100px;
+  color: rgb(255, 208, 90);
+  filter:brightness(5);
+  top: -2px;
+  right: 0;
+  animation: shootingStar 10s ease;
+  position:absolute;
+}
+
+.star-trail {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  color: rgb(255, 208, 90);
+  filter:brightness(2);
+  animation: shootingStar 10s ease-out;
+  background: radial-gradient(circle, #ffd700, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ffd700;
+}
+
+.love-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 2rem;
+  box-sizing: border-box;
+  animation: fadeIn 1s ease-out;
+}
+
+.message-content {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+}
+
+.message-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.message-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.birthday-wish {
+  color: #ffd700 !important;
+  font-weight: 500;
+  margin-top: 1.5rem !important;
+}
+
+.signature {
+  font-style: italic;
+  color: #ffd700 !important;
+  font-size: 0.9rem !important;
+  margin-top: 2rem !important;
+}
+
+.special-moment {
+  background: linear-gradient(45deg, #ff6b6b, #ffd700);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  font-weight: bold;
+  animation: celebration 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0px);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes moonGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: translateX(100px) translateY(-50px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100vw) translateY(500px);
+    opacity: 0;
+  }
+}
+
+@keyframes celebration {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .story-panel {
+    padding: 1.5rem;
+  }
+
+  .story-title {
+    font-size: 2rem;
+  }
+
+  .panel-title {
+    font-size: 1.6rem;
+  }
+
+  .panel-text {
+    font-size: 0.9rem;
+  }
+
+  .message-content {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .message-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .message-content p {
+    font-size: 0.9rem;
+  }
+
+  .moon-image {
+    opacity:0;
+  }
+
+  .leo-constellation {
+    width: 250px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-title {
+    font-size: 1.8rem;
+  }
+
+  .story-date {
+    font-size: 1rem;
+  }
+
+  .story-subtitle {
+    font-size: 1rem;
+  }
+
+  .panel-title {
+    font-size: 1.4rem;
+  }
+
+  .message-content {
+    padding: 1rem;
+  }
+  .time-display  {
+    top:5%;
+    width:100%;
+    font-size:0.8rem;
+    opacity:1;
+    
+  }
+  .moon-phase.revealed .moon-image {
+    margin-top:5%;
+  transform: scale(1.5);
+  opacity:1;
+}
+  /* .time-display h2 {
+      font-size:1rem;
+    }
+  .time-display p {
+      font-size:0.8rem;
+    } */
+  .time-display.collapse {
+      width:1%;
+      opacity:0;
+  }
+  .moon canvas {
+    
+    width:750px !important;
+    height:500px !important;
+  }
+  .moon {
+    margin-bottom:200px;
+  }
+}
+.moon-phase label {
+  opacity:0;
+  color:white;
+  font-family:'Lucida Sans', cursive;
+  display:block;
+}
+.moon-phase.revealed label {
+  opacity:1;
+
+}
+.time-display {
+  color:rgb(255, 255, 255);
+  position:fixed;
+  background-color: rgba(0, 0, 114, 0);
+  top:2%;
+  right:1%;
+  width:40%;
+  z-index:1;
+  transition:0.3s ease;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.time-display.collapse {
+      width:5%;
+      top:0%;
+      right:0%;
+      font-size:0.1rem;
+}
+.moon {
+  transition: bounce 4s ease;
+}
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: auto;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+}
+@keyframes heartbeatGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px #fff099cc);
+    
+    opacity: 1;
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #fff099ff);
+    filter:brightness(1.5);
+    opacity: 0.7;
+  }
+}
+.heartbeat-glow {
+  animation: heartbeatGlow 1.5s infinite ease-in-out;
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 2s ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
