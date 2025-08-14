@@ -133,7 +133,7 @@ const PhotoGallery = () => {
 
             <div className="end-message">
               <h2>To many more beautiful memories together</h2>
-              <p>Happy Birthday, my love! 🎉</p>
+              <p>I love you</p>
             </div>
           </div>
 

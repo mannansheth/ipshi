@@ -28,7 +28,7 @@ const Login = () => {
                 inpPass.style.fontSize = (countWrong+1)*30 + "px";
                 btn.style.width = (countWrong+1)*200 + "px";
                 btn.style.fontSize = (countWrong+1)*20 + "px";
-                btn.innerText = "PLEASE INPUT CORRECT"
+                btn.innerText = countWrong === 0 ? "Try harder" : countWrong === 1 ? "Come on you can do this" : "LAST CHANCE"
                 setCountWrong(countWrong+1);
             }
         }
