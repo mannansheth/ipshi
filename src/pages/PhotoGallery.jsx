@@ -35,7 +35,6 @@ const PhotoGallery = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
   const handleLike = (id) => {
-    console.log(id);
     liked.includes(id) ?setLiked([...liked].filter(i => i!==id))  : setLiked([...liked, id]);
     localStorage.setItem("liked", JSON.stringify(liked))
   }

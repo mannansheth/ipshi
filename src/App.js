@@ -46,7 +46,6 @@ function App() {
             ? `/images/us/image${Math.floor(Math.random() * 18)}.jpg`
             : currentSongData.image_src,
       };
-      console.log(data)
       if (reqdData.id && lastFetchedTrackIdRef.current === reqdData.id) {
         setCurrentSongData((prev) => ({ ...(prev || {}), ...reqdData }));
       } else {
@@ -71,7 +70,7 @@ function App() {
         token = localStorage.getItem("spotify_access_token");
         if (!token) {
           try {
-            const r = await fetch("http://127.0.0.1:5000/spotify/refresh");
+            const r = await fetch(`${process.env.REACT_APP_BACKEND_URL}/spotify/refresh`);
             if (r.ok) {
               const data = await r.json();
               token = data.access_token;
@@ -133,7 +132,7 @@ function App() {
   return (
     <Router>
       <div className={`App ${isMusicPlayerOpen ? "blur" : ""}`}>
-        <div class="blur-bg"></div>
+        <div className="blur-bg"></div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/card" element={<BirthdayCard />} />

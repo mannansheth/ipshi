@@ -147,7 +147,7 @@ export default function MusicPlayer({
             <div className="login-card">
               <button
                 onClick={() =>
-                  (window.location.href = "http://127.0.0.1:5000/spotify/login")
+                  (window.location.href = `${process.env.REACT_APP_BACKEND_URL}/spotify/login`)
                 }
                 className="spotify-login-btn"
               >

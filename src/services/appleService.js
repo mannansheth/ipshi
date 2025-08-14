@@ -1,5 +1,6 @@
 // music-frontend/src/services/appleService.js
 let music;
+const URL = process.env.REACT_APP_BACKEND_URL
 
 export async function ensureMusicKit() {
   if (window.MusicKit) return;
@@ -14,7 +15,7 @@ export async function ensureMusicKit() {
 
 export async function initApple() {
   await ensureMusicKit();
-  const devTokenRes = await fetch("http://127.0.0.1:5000/apple/dev-token");
+  const devTokenRes = await fetch(`${URL}/apple/dev-token`);
   const { developerToken } = await devTokenRes.json();
 
   window.MusicKit.configure({

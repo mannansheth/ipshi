@@ -1,11 +1,11 @@
 // music-frontend/src/services/playerAdapter.js
 import * as spotify from "./spotifyService";
 import * as apple from "./appleService";
-
+const URL = process.env.REACT_APP_BACKEND_URL
 export async function detectProvider() {
   // Prefer Spotify if you already pre-authorized (you can refine this)
   try {
-    const r = await fetch("http://127.0.0.1:5000/api/spotify/check-user");
+    const r = await fetch(`${URL}/api/spotify/check-user`);
     if (r.ok) return "spotify";
   } catch {}
   return "apple";

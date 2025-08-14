@@ -1,6 +1,6 @@
 let deviceId = null;
 let player = null;
-
+const URL = process.env.REACT_APP_BACKEND_URL
 export async function initSpotify(accessToken) {
   return new Promise((resolve, reject) => {
     // Define the global callback **before loading the SDK**
@@ -38,7 +38,7 @@ export async function initSpotify(accessToken) {
 }
 
 export async function transferPlayback(accessToken) {
-  await fetch("http://127.0.0.1:5000/api/spotify/transfer", {
+  await fetch(`${URL}/api/spotify/transfer`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ device_id: deviceId, access_token: accessToken }),
@@ -46,7 +46,7 @@ export async function transferPlayback(accessToken) {
 }
 
 export const playPlaylist = async (accessToken) => {
-  await fetch("http://127.0.0.1:5000/api/spotify/playPlaylist", {
+  await fetch(`${URL}/api/spotify/playPlaylist`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -62,7 +62,7 @@ export const playPlaylist = async (accessToken) => {
 export async function playUris(accessToken, uris = null) {
   // Build payload conditionally to avoid spreading `undefined`
   const payload = Object.assign({ access_token: accessToken, device_id: deviceId }, uris ? { uris } : {});
-  await fetch("http://127.0.0.1:5000/api/spotify/play", {
+  await fetch(`${URL}/api/spotify/play`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -70,7 +70,7 @@ export async function playUris(accessToken, uris = null) {
 }
 
 export async function pause(accessToken) {
-  await fetch("http://127.0.0.1:5000/api/spotify/pause", {
+  await fetch(`${URL}/api/spotify/pause`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ access_token: accessToken }),
@@ -78,7 +78,7 @@ export async function pause(accessToken) {
 }
 
 export async function getCurrentDetails(accessToken) {
-  const r = await fetch(`http://127.0.0.1:5000/api/spotify/current`, {
+  const r = await fetch(`${URL}/api/spotify/current`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   if (r.status === 204) return {};
@@ -87,7 +87,7 @@ export async function getCurrentDetails(accessToken) {
 }
 
 export async function searchTracks(accessToken, q) {
-  const r = await fetch(`http://127.0.0.1:5000/api/spotify/search?q=${encodeURIComponent(q)}`, {
+  const r = await fetch(`${URL}/api/spotify/search?q=${encodeURIComponent(q)}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   return r.json();
