@@ -32,11 +32,11 @@ export default function MusicPlayer({
     progressIntervalRef.current = setInterval(() => {
       setCurrentSongData((prev) => {
         if (!prev?.progress_ms || !prev?.duration_ms) return prev || {};
-        const next = Math.min(prev.progress_ms + 10, prev.duration_ms);
+        const next = Math.min(prev.progress_ms + 50, prev.duration_ms);
         if (next >= prev.duration_ms) clearInterval(progressIntervalRef.current);
         return { ...prev, progress_ms: next };
       });
-    }, 10);
+    }, 50);
     return () => clearInterval(progressIntervalRef.current);
   }, [isPlaying]);
 
@@ -114,7 +114,7 @@ export default function MusicPlayer({
       if (currentSongData.type === "Album") {
         setTimeout(() => {
           getCurrentDetails(true)
-        }, 500)
+        }, 2000)
       }
         else if(currentSongIndex < queue.length - 1 && queue.length >= 1 && currentSongData.type === "Track") {
             setCurrentSongIndex(prev => prev + 1);

@@ -269,6 +269,9 @@
   background: #000;
   cursor: pointer;
   position: relative;
+  background:url("/public/images/star-bg.jpg");
+  background-size: contain;
+
 }
 
 .finale-sky {
@@ -295,15 +298,15 @@
 }x
 
 .shooting-star {
-  /* width: 30px;
-  height: 10px; */
+
   width:100px;
   color: rgb(255, 208, 90);
   filter:brightness(5);
-  top: -2px;
+  top:1px;
   right: 0;
   animation: shootingStar 10s ease;
   position:absolute;
+  z-index:999;
 }
 
 .star-trail {
@@ -311,14 +314,14 @@
   top: -2px;
   right: 0;
   width: 30px;
-  filter:blur(100px);
+  filter:blur(200px);
   height: 10px;
-  color: rgb(255, 208, 90);
+  color: rgba(198, 195, 182, 0.856);
   filter:brightness(2);
   animation: shootingStar 20s ease-out;
-  background: radial-gradient(circle, #ffd700, transparent);
+  background: radial-gradient(circle, gold, transparent);
   border-radius: 50%;
-  box-shadow: 0 0 20px #ffd700;
+  box-shadow: 0 0 40px #ffd900d3;
 }
 
 .love-message {

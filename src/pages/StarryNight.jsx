@@ -166,7 +166,7 @@ const StarryNight = ({isBirthdayTime}) => {
         break
       case 4:
         setShowShootingStar(true)
-        setTimeout(() => {setShowMessage(true); setShowShootingStar(false);}, 1000)
+        setTimeout(() => {setShowMessage(true); setShowShootingStar(false);}, 20000)
         break
     }
   }
@@ -345,6 +345,7 @@ const StarryNight = ({isBirthdayTime}) => {
         className={`story-panel panel-finale ${finaleVisible ? "fade-in" : "fade-out"}`}
         onClick={handlePanelTap}
         ref={finaleRef}
+        
       >
         <div className="finale-sky">
           {showShootingStar && (

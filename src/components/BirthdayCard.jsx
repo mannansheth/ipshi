@@ -56,7 +56,7 @@ const BirthdayCard = () => {
                       
                     </p>
                     <p>
-                      Every single day, i feel so thankful that you looked in my direction, and i genuinely dont know what would my life be without you.
+                      Every single day, i feel so thankful that you looked in my direction, and i genuinely dont know what my life would be without you.
                       Thankyou so much for having the balls that i never had.
                       Thankyou for letting me be a part of your life.
                     </p>
@@ -67,7 +67,7 @@ const BirthdayCard = () => {
                       I wonder where we may have been if i had the balls :(
                     </p>
                     <p>
-                      I still remember how i awkward and shy i was on 4th Oct, 2024, the day we first met. The moment i saw you, i was MESMERIZED i was STRUCK by your beauty, no words came out my mouth. The drive after that was SO perfect and i absolutely love how well we bond on music. it is genuinely my favourite thing about us. Music bring us so close its crazy.
+                      I still remember how awkward and shy i was on 4th Oct, 2024, the day we first met. The moment i saw you, i was MESMERIZED i was STRUCK by your beauty, no words came out my mouth. The drive after that was SO perfect and i absolutely love how well we bond on music. it is genuinely my favourite thing about us. Music brings us so close its crazy.
                     </p>
                     <p>
                       Its crazy how awkward i used to be when we first started talking, and to compare that to now is CRAZY. you met someone who was literally mute and has now been turned into an occasional yapper by his sweet girlfriend. i love the change you got in me. I love actively trying to be a better person for you and treat you the way a princess must be treated.
@@ -75,7 +75,7 @@ const BirthdayCard = () => {
                     <p>
                       Ipshi you are the best person to ever enter my life and you have no idea how happy you make me.
                       Every single day that i get to spend with you is the best day of my life.
-                      Today, we have completed exactly 300 days together, and i can confirm these have been the BEST period of my life.
+                      Today, we have completed exactly 300 days together, and i can confirm this has been the BEST period of my life.
                     </p>
                     <p>
                      You are genuinely the sweetest, prettiest, most interesting, entertaining, funny, HOT, beautiful, gorgeous girl ive ever seen and its crazy how comfortable i have gotten with you. The boy that was shy and did not open up to anyone, has an amazing woman in his life that he can share anyone with. 
@@ -85,7 +85,7 @@ const BirthdayCard = () => {
                      The way my mood changes, and my facial expressions transform as soon as i look at you is CRAZY.
                     </p>
                     <p>
-                      You have the PRETTIEST eyes i have ever seen. I remember them so perfectly. You had me hooked onto you and your pretty eyes the moment i saw you on 4th Oct, 2024, for the very first time after a year. Your eyes and your hair and your ADORABLE voice and that pretty blue lehenga/chanyacholi (i still get confused), are the things i was HOOKED onto. you had me going crazy with your beauty. 
+                      You have the PRETTIEST eyes i have ever seen. I remember them so perfectly. You had me hooked onto you and your pretty eyes the moment i saw you on 4th Oct, 2024, for the very first time after a year. Your eyes and your hair and your ADORABLE voice and that pretty blue lehenga/chanyacholi (i still get confused), are the things i was HOOKED onto. you had me going crazy with your beauty and your kind nature. 
                     </p>
                     <p>
                       I love and adore how comfortable we have gotten with each other, and it feels so much more than a year.
@@ -125,7 +125,7 @@ const BirthdayCard = () => {
                       You are the best girlfriend EVER and i am so so so so so so so grateful to call someone THIS pretty MY GIRLFRIEND.
                     </p>
                     <p>
-                      You are the love of my life and I CANNNOTTTTTTTTT wait to spend the rest of my life with you. 
+                      You are the love of my life and I CANNNOTTTT wait to spend the rest of my life with you. 
                       I CANNNNOTTTT wait to be with you every single moment for the rest of my life
                     </p>
                     <p>

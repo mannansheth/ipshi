@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import "../styles/Home.css"
+import { FaSun } from "react-icons/fa"
 
 const Home = ({isBirthdayTime, ready}) => {
   const [mounted, setMounted] = useState(false)
@@ -11,21 +12,27 @@ const Home = ({isBirthdayTime, ready}) => {
   useEffect(() => {
     setMounted(true)
   }, [])
-
+  const heartStyles = useMemo(() => {
+    return Array.from({ length: 40 }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      animationDuration: `${3 + Math.random() * 2}s`,
+    }));
+  }, []);
+  
   return (
     <div className={`home ${mounted ? "mounted" : ""}`}>
       <div className="background-hearts">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="heart"
-            style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
-            }}
-          >
+        {heartStyles.slice(0,20).map((style, i) => (
+          <div key={i} className="heart" style={style}>
             💖
+          </div>
+        ))}
+      </div>
+      <div className="background-hearts">
+        {heartStyles.slice(21, 40).map((style, i) => (
+          <div key={i} className="heart" style={style}>
+            🌻
           </div>
         ))}
       </div>
@@ -78,14 +85,14 @@ const Home = ({isBirthdayTime, ready}) => {
         </div>
         
         <div className={`error-message gallery ${displayGalleryError ? 'revealed':""}`}> 
-          <p>You can only go to this page in {Math.floor((new Date(2025, 7, 18, 0, 0) - new Date()) / 60000) 
+          <p>Page will open in {Math.floor((new Date(2025, 7, 18, 0, 0) - new Date()) / 60000)  
           } mins</p>
           {!ready && 
             "Go connect spotify and chill"
           }
           </div>
         <div className={`error-message stars ${displayStarsError ? 'revealed':""}`}> 
-          <p>You can only go to this page in {Math.floor((new Date(2025, 7, 18, 1, 43) - new Date()) / 60000) 
+          <p>Page will open in {Math.floor((new Date(2025, 7, 18, 1, 43) - new Date()) / 60000) 
           } mins</p>
           {!ready && 
             "Go connect spotify and chill"
