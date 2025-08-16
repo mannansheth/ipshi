@@ -9,7 +9,7 @@ import React, {
 } from "react"
 import { Link } from "react-router-dom"
 import "../styles/StarryNight.css"
-import { FaSalesforce, FaStar, FaStarOfLife } from 'react-icons/fa';
+import { FaClock, FaSalesforce, FaStar, FaStarOfLife } from 'react-icons/fa';
 import { CSSTransition } from 'react-transition-group';
 import BirthdayCard from "../components/BirthdayCard";
 
@@ -165,8 +165,7 @@ const StarryNight = ({isBirthdayTime}) => {
         setShowMoonPhase(!showMoonPhase)
         break
       case 4:
-        setShowShootingStar(true)
-        setTimeout(() => {setShowMessage(true); setShowShootingStar(false);}, 20000)
+        
         break
     }
   }
@@ -348,7 +347,7 @@ const StarryNight = ({isBirthdayTime}) => {
         
       >
         <div className="finale-sky">
-          {showShootingStar && (
+          {showShootingStar && isBirthdayTime() && (
             <div className="shooting-star-container">
               <div className="shooting-star"></div>
               <FaStar className="star-trail"></FaStar>
@@ -356,7 +355,7 @@ const StarryNight = ({isBirthdayTime}) => {
           )}
         </div>
 
-        {showMessage && currentPanel >=3 && (
+        {showMessage && currentPanel >=3 && isBirthdayTime() && (
           <div className="love-message">
 
             <BirthdayCard />
@@ -368,9 +367,9 @@ const StarryNight = ({isBirthdayTime}) => {
           <div className="panel-content">
             <h2 className="panel-title">A Shooting Star</h2>
             <p className="panel-text">
-              {isBirthdayTime() ? "It's time! Make a wish..." : "Tap to make a wish come true"}
+              {isBirthdayTime() ? "It's time! Make a wish..." : ""}
             </p>
-            {!isBirthdayTime() && <div className="tap-hint" onClick={() => setShowShootingStar(true)}>👆 Tap for magic</div>}
+            {!isBirthdayTime() && <div className="tap-hint" >Wait for the perfect time <FaClock /></div>}
           </div>
         )}
       </div>
