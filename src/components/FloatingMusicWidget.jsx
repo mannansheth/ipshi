@@ -43,7 +43,7 @@ export default function FloatingMusicWidget({
                   width: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`,
                 }}
               >
-                <FaHeart style={{position:"absolute", left: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`, color:"white", fontSize:"1rem", top:"-5px", zIndex:999}} />
+                <FaHeart style={{position:"absolute", left: `${((currentSongData.progress_ms - 3000) / (currentSongData.duration_ms || 1)) * 100}%`, color:"violet", fontSize:"1.2rem", top:"-8px", zIndex:999}} />
               </div>
             </div>
             <div className="time-display">

@@ -32,7 +32,7 @@ function App() {
       if (!playerRef.current?.getCurrent) return;
       const data = await playerRef.current.getCurrent();
       if (!data) return;
-      
+
       const reqdData = {
         progress_ms: Number(data.progress_ms) || 0,
         duration_ms: Number(data.item?.duration_ms || data.duration_ms) || 0,
@@ -44,6 +44,7 @@ function App() {
           forceImage || !currentSongData.image_src
             ? `/images/us/image${Math.floor(Math.random() * 30 + 1)}.jpg`
             : currentSongData.image_src,
+        type:data.context === null ? "Track" : "Album"
       };
       if (reqdData.id && lastFetchedTrackIdRef.current === reqdData.id) {
         setCurrentSongData((prev) => ({ ...(prev || {}), ...reqdData }));

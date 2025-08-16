@@ -23,7 +23,7 @@ const BirthdayCard = () => {
         <div className={`birthday-card ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
           <div className={`card-front ${isOpen ? "open" : ""}`} >
             <div className="card-decorations">
-              {[...Array(15)].map((_, i) => (
+              {[...Array(5)].map((_, i) => (
                 <div
                   key={i}
                   className="sparkle"

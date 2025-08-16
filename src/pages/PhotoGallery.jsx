@@ -4,12 +4,14 @@ import { useEffect, useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import "../styles/PhotoGallery.css"
 import HoverVideoMobileFirst from "../components/VideoOnHover"
-import { FaHeart, FaHeartBroken } from "react-icons/fa"
+import { FaArrowLeft, FaHeart, FaHeartBroken } from "react-icons/fa"
+import { FaArrowDown91, FaArrowDownLong } from "react-icons/fa6"
 
 const PhotoGallery = () => {
   const [scrollY, setScrollY] = useState(0)
   const [liked, setLiked] = useState(JSON.parse(localStorage.getItem("liked") || "[]"))
    const containerRefs = useRef([]);
+   const [info, setInfo] = useState(false)
   // Sample photos - replace with your actual photos
   const photos = [
     { id: 1, src: `/images/us/image11.jpg`, caption: "OUR FIRST", videoUrl:null },
@@ -17,18 +19,27 @@ const PhotoGallery = () => {
     { id: 3, src: `/images/us/image12.jpg`, caption: "How can i not love this cutie",videoUrl:null },
     { id: 15, src: `/images/us/image17.jpg`, caption: "I LOVE KISSING YOU",videoUrl:"/videos/video3.mp4" },
     { id: 4, src: `/images/us/image6.jpg`, caption: "THE perfect night together.",videoUrl:null },
+    { id: 19, src: `/images/us/image35.jpg`, caption: "Polaroid inside a polaroid is CRAZYYYYYY. PS i always got you in my pocket",videoUrl:null },
     { id: 5, src: `/images/us/image14.jpg`, caption: "Our BEST tradition. I love when we're yapping.",videoUrl:"/videos/video4.mp4" },
     { id: 14, src: `/images/us/image18.jpg`, caption: "Will forever be recreating trends.",videoUrl:"/videos/video6.mp4" },
     { id: 6, src: `/images/us/image5.jpg`, caption: "Navratri has always been so special.",videoUrl:null },
+    { id: 16, src: `/images/us/image32.jpg`, caption: "DEATH BY CHOCOLATEEEEE.",videoUrl:"/videos/video7.mp4" },
     { id: 7, src: `/images/us/image7.jpg`, caption: "Your kisses mean the world to me.",videoUrl:null },
     { id: 8, src: `/images/us/image13.jpg`, caption: "Drivin and vibin.",videoUrl:"/videos/video1.mp4" },
+    { id: 17, src: `/images/us/image33.jpg`, caption: "Cute toh hai ham",videoUrl:null },
+    { id: 18, src: `/images/us/image34.jpg`, caption: "Me ADORING you forever",videoUrl:"/videos/video8.mp4" },
     { id: 9, src: `/images/us/image8.jpg`, caption: "I can't wait to spend my whole life with you." , videoUrl:null},
     { id: 10, src: `/images/us/image15.jpg`, caption: "YES IT IS A THING WE ALWAYS DO" , videoUrl:"/videos/video2.mp4"},
     { id: 11, src: `/images/us/image1.jpg`, caption: "😒🙄. Bro taught me so well.", videoUrl:null },
     { id: 12, src: `/images/us/image16.jpg`, caption: "Matching outfits with you is the CUTEST thing ever", videoUrl:"/videos/video5.mp4" },
     { id: 13, src: `/images/us/image10.jpg`, caption: "Keep holding onto me. Forever and always", videoUrl:null },
   ]
-
+  useEffect(() => {
+    setInfo(true)
+    setTimeout(() => {
+      setInfo(false);
+    }, 2000)
+  }, [])
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
     window.addEventListener("scroll", handleScroll)
@@ -76,16 +87,20 @@ const PhotoGallery = () => {
       <Link to="/" className="back-button">
         ← Back Home
       </Link>
-
+      <div className={`information ${info && "revealed"}`}>
+         <span><FaArrowDownLong /> React</span>
+      </div>
+      
       <div className="film-strip-container">
         <div className="film-header">
           <h1>Mini photo gallery</h1>
+          <p style={{margin:0}}>19 polaroids for my beautiful girl turning 19</p>
           <p>Every photo is so special 📸</p>
         </div>
 
         <div className="film-strip">
           <div className="film-holes film-holes-left">
-            {[...Array(photos.length*12)].map((_, i) => (
+            {[...Array(Math.floor(photos.length*11.5))].map((_, i) => (
               <div key={i} className="film-hole"></div>
             ))}
           </div>
@@ -131,13 +146,14 @@ const PhotoGallery = () => {
             ))}
 
             <div className="end-message">
+              
               <h2>To many more beautiful memories together</h2>
-              <p>I love you</p>
+              <p>I love you 🫶</p>
             </div>
           </div>
 
           <div className="film-holes film-holes-right">
-            {[...Array(photos.length*12)].map((_, i) => (
+            {[...Array(Math.floor(photos.length*11.5))].map((_, i) => (
               <div key={i} className="film-hole"></div>
             ))}
           </div>

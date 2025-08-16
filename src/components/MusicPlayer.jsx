@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaMusic, FaPlay, FaPause, FaSpotify, FaXmark, FaHeart, FaMagnifyingGlassPlus, FaArrowRight, FaPlus, FaCheck, FaStop, FaDiagramNext, FaForward, FaForwardStep } from "react-icons/fa6";
 import { RiSearchEyeFill, RiSearchFill } from "react-icons/ri";
+import { getCurrentDetails } from "../services/spotifyService";
 
 export default function MusicPlayer({
   isMusicPlayerOpen,
@@ -65,14 +66,26 @@ export default function MusicPlayer({
       try {
         const data = await playerRef.current.search(val);
         if (provider === "spotify") {
-          setResults(
-            data.tracks?.items?.map((t) => ({
+          const tracks = data.tracks?.items?.slice(0,10)?.map((t) => ({
               id: t.id,
               title: t.name,
               artist: t.artists.map((a) => a.name).join(", "),
               uri: t.uri,
               image: t.album?.images?.[0]?.url,
+              type:"Track",
+              
+            })) || [];
+            const albums = data.albums?.items?.slice(0,5)?.map((t) => ({
+              id: t.id,
+              title: t.name,
+              artist: t.artists.map((a) => a.name).join(", "),
+              uri: t.uri,
+              image: t.images?.[0]?.url,
+              type:"Album",
+              total_tracks:t.total_tracks
             })) || []
+          setResults(
+            [...tracks, ...albums]
           );
         } else {
           const songs = data?.results?.songs?.data || [];
@@ -97,9 +110,13 @@ export default function MusicPlayer({
   }
 
   useEffect(() => {
-    if (queue.length >=1 && currentSongData && currentSongData.progress_ms >= currentSongData.duration_ms) {
-
-        if (currentSongIndex < queue.length - 1) {
+    if (currentSongData && currentSongData.progress_ms >= currentSongData.duration_ms) {
+      if (currentSongData.type === "Album") {
+        setTimeout(() => {
+          getCurrentDetails(true)
+        }, 500)
+      }
+        else if(currentSongIndex < queue.length - 1 && queue.length >= 1 && currentSongData.type === "Track") {
             setCurrentSongIndex(prev => prev + 1);
         }
     }
@@ -124,7 +141,7 @@ export default function MusicPlayer({
       await playerRef.current.play(uri);
     }
     setIsPlaying(true);
-    setTimeout(() => GetCurrentDetails(true), 100);
+    setTimeout(() => GetCurrentDetails(true), 1000);
   } catch (err) {
     console.error("play failed", err);
   }
@@ -267,8 +284,11 @@ export default function MusicPlayer({
                 <img src={r.image || "/placeholder.svg"} alt="" />
               </div>
               <div className="track-info">
-                <div className="track-title">{r.title}</div>
-                <div className="track-artist">{r.artist}</div>
+                <div className="track-title">{r.title}</div> 
+                <div className="track-artist">{r.artist} </div>
+                  <div className="track-artist">
+                    {r.type==="Album" && <span>{r.type} ({r.total_tracks})</span>}
+                    </div>
               </div>
               <div className="play-overlay">
                 {queue.slice(currentSongIndex === -1 ? 0 : currentSongIndex).includes(r.uri) ?  <FaCheck /> : <FaPlus onClick={(e) => {e.stopPropagation(); addToQueue(r)}}/>} 
