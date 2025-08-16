@@ -22,7 +22,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   
   useEffect(() => {
-    if (localStorage.getItem("code") !== "180421" && window.location.pathname !== "/login") {
+    if (localStorage.getItem("code") !== "18-08-2006" && window.location.pathname !== "/login") {
       window.location.href = "/login";
     }
   }, []);
@@ -93,7 +93,15 @@ function App() {
       clearInterval(progressIntervalRef.current);
     };
   }, []);
-
+  const isBirthdayTime = () => {
+    const now = new Date()
+      return (
+        now.getMonth() === 7 &&
+        now.getDate() === 18 &&
+        now.getHours() === 1 &&
+        now.getMinutes() === 45
+      )
+    }
   // Autoplay playlist on ready (if available)
   // useEffect(() => {
   //   const attemptAutoPlay = async () => {
@@ -133,9 +141,9 @@ function App() {
       <div className={`App ${isMusicPlayerOpen ? "blur" : ""}`}>
         <div className="blur-bg"></div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home isBirthdayTime={isBirthdayTime} ready={ready}/>} />
           <Route path="/photos" element={<PhotoGallery />} />
-          <Route path="/stars" element={<StarryNight />} />
+          <Route path="/stars" element={<StarryNight isBirthdayTime={isBirthdayTime} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/callback" element={<Callback />} />
           <Route path="*" element = {<Login />}/>

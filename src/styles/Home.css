@@ -27,10 +27,29 @@
 .home-content {
   text-align: center;
   z-index: 2;
+  position:relative;
   max-width: 800px;
   padding: 2rem;
 }
+.error-message {
+  position: absolute;
+  top:60%;
+  font-size:0.8rem;
+  right:25%;
+  left:25%;
+  opacity:0;
+  transition: all 500ms ;
+  background-color:white;
+  color:red;
+  font-weight:bold;
+  padding:5px;
+  border:2px solid black;
+  border-radius:3%;
 
+}
+.error-message.revealed {
+  opacity:1;
+}
 .home.mounted .home-content {
   animation: fadeIn 1s ease-out;
 }

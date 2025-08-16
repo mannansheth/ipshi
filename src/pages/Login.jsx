@@ -14,8 +14,8 @@ const Login = () => {
     const handleSubmit = () => {
         const inpPass = document.getElementById("pass-input");
         const btn = document.getElementById("submit-btn");
-        if (inpPass.value === "180421") {
-            localStorage.setItem("code", "180421")
+        if (inpPass.value === "18-08-2006") {
+            localStorage.setItem("code", "18-08-2006")
             window.location.pathname = "/"
         } else {
             if (countWrong >= 4) {

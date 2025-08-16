@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import "../styles/Home.css"
 
-const Home = () => {
+const Home = ({isBirthdayTime, ready}) => {
   const [mounted, setMounted] = useState(false)
-
+  const [displayError, setDisplayError] = useState(false)
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -39,16 +39,36 @@ const Home = () => {
             <h3>Our Memories</h3>
             <p>A film strip of our beautiful moments</p>
           </Link>
-
-          <Link to="/stars" className="nav-card stars-theme">
+          {isBirthdayTime() ? 
+            <Link to="/stars" className="nav-card stars-theme">
+              <div className="card-icon">⭐</div>
+              <h3>Your Birth Sky</h3>
+              <p>The stars from August 18, 2006</p>
+            </Link>
+          :
+          <div onClick={() => {
+            setDisplayError(true);
+            setTimeout(() => {
+              setDisplayError(false);
+            }, 3000)
+          }
+          } className="nav-card stars-theme">
             <div className="card-icon">⭐</div>
             <h3>Your Birth Sky</h3>
             <p>The stars from August 18, 2006</p>
-          </Link>
+          </div>
+          }
+        
         </div>
+        <div className={`error-message ${displayError && 'revealed'}`}> 
+          <p>You can only go to this page in {Math.floor((new Date(2025, 7, 18, 1, 43) - new Date()) / 60000)} mins</p>
+          {!ready && 
+            "Go connect spotify"
+          }
 
+          </div>
         <div className="countdown">
-          <p>Made with all my love 💕</p>
+          <p>Made by your boyfriend💕</p>
         </div>
       </div>
     </div>

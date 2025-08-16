@@ -176,6 +176,10 @@ export default function MusicPlayer({
                 <FaSpotify className="spotify-icon" />
                 Connect with Spotify
               </button>
+              <p style={{margin:0}}><b>Email:</b> mannan.sheth4@gmail.com</p>
+              <b>Pass:</b> Ask your boyfriend
+              <p>(im sorry i tried connecting apple music but it costs $99 just to get a developer account 😃)</p>
+              
             </div>
           </div>
         )}
@@ -239,7 +243,7 @@ export default function MusicPlayer({
             </div>
           </div>
         )}
-        {provider === "spotify" && 
+        {provider === "spotify" && ready && 
         <div className="search-section">
           <div className="search-container">
             <FaSearch className="search-icon" />

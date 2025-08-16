@@ -43,7 +43,7 @@ const polygonPoints = ["30,215 40,240 15,225 45,225 24,240",
                   "250,15 260,40 235,25 265,25 244,40",
                   "280,50 290,75 265,60 295,60 274,75"
                   ]
-const StarryNight = () => {
+const StarryNight = ({isBirthdayTime}) => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [currentPanel, setCurrentPanel] = useState(0)
   const [showLeoConstellation, setShowLeoConstellation] = useState(false)
@@ -98,7 +98,7 @@ const StarryNight = () => {
       const now = new Date()
       setCurrentTime(now)
 
-      if (!isBirthdayTime()) {
+      if (isBirthdayTime()) {
         if (currentPanel === 4) {
           setShowShootingStar(true)
           setTimeout(() => {
@@ -173,24 +173,13 @@ const StarryNight = () => {
 
   const formatTime = (date) => {
     return date.toLocaleString("en-US", {
-      weekday: "short",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
+      hour:"2-digit",
       minute: "2-digit",
       second: "2-digit",
     })
   }
 
-  const isBirthdayTime = () => {
-    return (
-      currentTime.getMonth() === 7 &&
-      currentTime.getDate() === 18 &&
-      currentTime.getHours() === 1 &&
-      currentTime.getMinutes() === 45
-    )
-  }
+  
 
   return (
     <div className="starry-story-container" ref={containerRef}>
@@ -321,7 +310,7 @@ const StarryNight = () => {
             <label>1:45 AM | 18th August, 2006.</label>
             {showMoonPhase && <div className="moon-glow"></div>}
 
-            {!showMoonPhase && currentPanel >= 3 &&
+            {!showMoonPhase && currentPanel === 3 &&
             <CSSTransition
               in={!showMoonPhase}
               timeout={500}
