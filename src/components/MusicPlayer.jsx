@@ -31,11 +31,11 @@ export default function MusicPlayer({
     progressIntervalRef.current = setInterval(() => {
       setCurrentSongData((prev) => {
         if (!prev?.progress_ms || !prev?.duration_ms) return prev || {};
-        const next = Math.min(prev.progress_ms + 1000, prev.duration_ms);
+        const next = Math.min(prev.progress_ms + 10, prev.duration_ms);
         if (next >= prev.duration_ms) clearInterval(progressIntervalRef.current);
         return { ...prev, progress_ms: next };
       });
-    }, 1000);
+    }, 10);
     return () => clearInterval(progressIntervalRef.current);
   }, [isPlaying]);
 
@@ -98,6 +98,7 @@ export default function MusicPlayer({
 
   useEffect(() => {
     if (queue.length >=1 && currentSongData && currentSongData.progress_ms >= currentSongData.duration_ms) {
+
         if (currentSongIndex < queue.length - 1) {
             setCurrentSongIndex(prev => prev + 1);
         }
@@ -106,8 +107,7 @@ export default function MusicPlayer({
 
 
   useEffect(() => {
-    console.log(queue);
-    console.log(currentSongIndex)
+
   // Play whenever currentIndex changes
   if (queue.length > 0) {
     playUri(queue[currentSongIndex]);
@@ -124,7 +124,7 @@ export default function MusicPlayer({
       await playerRef.current.play(uri);
     }
     setIsPlaying(true);
-    setTimeout(() => GetCurrentDetails(true), 500);
+    setTimeout(() => GetCurrentDetails(true), 100);
   } catch (err) {
     console.error("play failed", err);
   }
@@ -206,7 +206,7 @@ export default function MusicPlayer({
                         width: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`,
                       }}
                     >
-                      <FaHeart style={{position:"absolute", left: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`, color:"white", fontSize:"1rem", top:"-5px", zIndex:999}} />
+                      <FaHeart style={{position:"absolute", left: `${((currentSongData.progress_ms - 1000) / (currentSongData.duration_ms || 1)) * 100}%`, color:"violet", fontSize:"1.3rem", top:"-8px", zIndex:999}} />
                     </div>
                     
                   </div>
@@ -252,11 +252,13 @@ export default function MusicPlayer({
           </div>
         </div>
         }
-        
 
         <div className="results-section">
           {results.map((r) => (
-            <button key={`${provider}-${r.id}`} className="track-item" onClick={() => addToQueue(r)}>
+            <button key={`${provider}-${r.id}`} className="track-item" onClick={() => {
+              
+              playUri(r.uri)
+            }}>
               <div className="track-image">
                 <img src={r.image || "/placeholder.svg"} alt="" />
               </div>
@@ -265,7 +267,7 @@ export default function MusicPlayer({
                 <div className="track-artist">{r.artist}</div>
               </div>
               <div className="play-overlay">
-                {queue.slice(currentSongIndex === -1 ? 0 : currentSongIndex).includes(r.uri) ?  <FaCheck /> : <FaPlus />} 
+                {queue.slice(currentSongIndex === -1 ? 0 : currentSongIndex).includes(r.uri) ?  <FaCheck /> : <FaPlus onClick={(e) => {e.stopPropagation(); addToQueue(r)}}/>} 
               </div>
             </button>
           ))}
