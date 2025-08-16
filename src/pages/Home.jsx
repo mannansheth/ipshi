@@ -34,12 +34,6 @@ const Home = () => {
         <p className="subtitle">A website made just for you ✨</p>
 
         <div className="navigation-cards">
-          <Link to="/card" className="nav-card card-theme">
-            <div className="card-icon">🎂</div>
-            <h3>Birthday Card</h3>
-            <p>Open your special birthday surprise</p>
-          </Link>
-
           <Link to="/photos" className="nav-card photos-theme">
             <div className="card-icon">📸</div>
             <h3>Our Memories</h3>

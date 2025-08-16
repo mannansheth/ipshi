@@ -1,7 +1,8 @@
 // music-frontend/src/components/MusicPlayer.jsx
 import React, { useEffect, useRef, useState } from "react";
-import { detectProvider, initPlayer } from "../services/playerAdapter";
-import { FaMusic, FaPlay, FaPause, FaSpotify, FaXmark, FaHeart, FaSearch, FaMagnifyingGlassPlus } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
+import { FaMusic, FaPlay, FaPause, FaSpotify, FaXmark, FaHeart, FaMagnifyingGlassPlus, FaArrowRight, FaPlus, FaCheck, FaStop, FaDiagramNext, FaForward, FaForwardStep } from "react-icons/fa6";
+import { RiSearchEyeFill, RiSearchFill } from "react-icons/ri";
 
 export default function MusicPlayer({
   isMusicPlayerOpen,
@@ -19,7 +20,8 @@ export default function MusicPlayer({
   
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  
+  const [queue, setQueue] = useState([]);
+  const [currentSongIndex, setCurrentSongIndex] = useState(-1);
   const debRef = useRef();
 
   // Increment progress_ms locally while playing
@@ -90,21 +92,43 @@ export default function MusicPlayer({
     }, 200);
   }
 
-  // Play selected track
-  async function play(item) {
-    try {
-      if (!playerRef.current) return;
-      if (provider === "spotify" && playerRef.current.play) {
-        await playerRef.current.play([item.uri]);
-      } else if (playerRef.current.play) {
-        await playerRef.current.play(item.id);
-      }
-      setIsPlaying(true);
-      setTimeout(() => GetCurrentDetails(true), 500);
-    } catch (err) {
-      console.error("play failed", err);
-    }
+  const addToQueue = item => {
+    setQueue(prev => [...prev, item.uri])
   }
+
+  useEffect(() => {
+    if (queue.length >=1 && currentSongData && currentSongData.progress_ms >= currentSongData.duration_ms) {
+        if (currentSongIndex < queue.length - 1) {
+            setCurrentSongIndex(prev => prev + 1);
+        }
+    }
+  }, [currentSongData?.progress_ms])
+
+
+  useEffect(() => {
+    console.log(queue);
+    console.log(currentSongIndex)
+  // Play whenever currentIndex changes
+  if (queue.length > 0) {
+    playUri(queue[currentSongIndex]);
+  }
+}, [currentSongIndex]);
+
+  // Play selected track
+  async function playUri(uri) {
+  try {
+    if (!playerRef.current) return;
+    if (provider === "spotify" && playerRef.current.play) {
+      await playerRef.current.play([uri]);
+    } else if (playerRef.current.play) {
+      await playerRef.current.play(uri);
+    }
+    setIsPlaying(true);
+    setTimeout(() => GetCurrentDetails(true), 500);
+  } catch (err) {
+    console.error("play failed", err);
+  }
+}
 
   // Toggle pause/resume using backend state only
   const handlePause = async () => {
@@ -122,7 +146,6 @@ export default function MusicPlayer({
       console.error("toggle pause/play failed", err);
     }
   };
-
   const hasSong = Object.keys(currentSongData || {}).length > 0;
 
   return (
@@ -138,10 +161,9 @@ export default function MusicPlayer({
         <div className="player-header">
           <h2 className="player-title">Music for Ipshi</h2>
           <button className="close-btn" onClick={() => setIsMusicPlayerOpen(false)}>
-            <FaXmark />
+            <FaXmark style={{color:"white"}} />
           </button>
         </div>
-
         {!ready && (
           <div className="login-section">
             <div className="login-card">
@@ -186,7 +208,10 @@ export default function MusicPlayer({
                       style={{
                         width: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`,
                       }}
-                    />
+                    >
+                      <FaHeart style={{position:"absolute", left: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`, color:"white", fontSize:"1rem", top:"-5px", zIndex:999}} />
+                    </div>
+                    
                   </div>
                 </div>
                 <div className="time-info">
@@ -210,8 +235,8 @@ export default function MusicPlayer({
                 <button className="control-btn play-btn" onClick={handlePause}>
                   {isPlaying ? <FaPause /> : <FaPlay />}
                 </button>
-                <button className="control-btn">
-                  <FaMusic />
+                <button className="control-btn" disabled={queue.length === 0 || currentSongIndex >= queue.length} onClick={() => {if (queue.length > 0 && currentSongIndex < queue.length) setCurrentSongIndex(prev=> prev+1)}}>
+                  <FaForwardStep />
                 </button>
               </div>
             </div>
@@ -220,7 +245,7 @@ export default function MusicPlayer({
 
         <div className="search-section">
           <div className="search-container">
-            <FaMagnifyingGlassPlus className="search-icon" />
+            <FaSearch className="search-icon" />
             <input
               className="search-input"
               placeholder={`Search ${provider === "spotify" ? "Spotify" : "Apple Music"} for our songs...`}
@@ -232,7 +257,7 @@ export default function MusicPlayer({
 
         <div className="results-section">
           {results.map((r) => (
-            <button key={`${provider}-${r.id}`} className="track-item" onClick={() => play(r)}>
+            <button key={`${provider}-${r.id}`} className="track-item" onClick={() => addToQueue(r)}>
               <div className="track-image">
                 <img src={r.image || "/placeholder.svg"} alt="" />
               </div>
@@ -241,7 +266,7 @@ export default function MusicPlayer({
                 <div className="track-artist">{r.artist}</div>
               </div>
               <div className="play-overlay">
-                <FaPlay />
+                {queue.slice(currentSongIndex === -1 ? 0 : currentSongIndex).includes(r.uri) ?  <FaCheck /> : <FaPlus />} 
               </div>
             </button>
           ))}

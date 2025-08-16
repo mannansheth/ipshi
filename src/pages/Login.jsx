@@ -18,7 +18,7 @@ const Login = () => {
             localStorage.setItem("code", "180421")
             window.location.pathname = "/"
         } else {
-            if (countWrong >= 2) {
+            if (countWrong >= 4) {
                 setIsWrong(true);
             }
             else {
@@ -28,11 +28,11 @@ const Login = () => {
                 inpPass.style.fontSize = (countWrong+1)*30 + "px";
                 btn.style.width = (countWrong+1)*200 + "px";
                 btn.style.fontSize = (countWrong+1)*20 + "px";
-                btn.innerText = countWrong === 0 ? "Try harder" : countWrong === 1 ? "Come on you can do this" : "LAST CHANCE"
+                btn.innerText = countWrong === 0 ? "Try harder" : countWrong === 1 ? "Come on you can do this" : "it is easy";
                 setCountWrong(countWrong+1);
             }
         }
-        localStorage.setItem("isWrong", JSON.stringify(countWrong >= 2))
+        localStorage.setItem("isWrong", JSON.stringify(countWrong >= 4))
     }
   return (
     <div>
@@ -41,7 +41,7 @@ const Login = () => {
             <>
             <h2>Enter password: </h2>
             <input type="password" placeholder="(its a special date)" id='pass-input'></input>
-            <p>****3 tries only</p>
+            <p>****5 tries only</p>
             <button onClick={handleSubmit} id="submit-btn">Submit</button>
             </>
             :

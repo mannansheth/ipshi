@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Home from "./pages/Home"
-import BirthdayCard from "./pages/BirthdayCard"
+import BirthdayCard from "./components/BirthdayCard"
 import PhotoGallery from "./pages/PhotoGallery"
 import StarryNight from "./pages/StarryNight"
 import "./App.css"
@@ -23,7 +23,6 @@ function App() {
   
   useEffect(() => {
     if (localStorage.getItem("code") !== "180421" && window.location.pathname !== "/login") {
-      // Use absolute path to avoid relative navigation issues
       window.location.href = "/login";
     }
   }, []);
@@ -33,7 +32,7 @@ function App() {
       if (!playerRef.current?.getCurrent) return;
       const data = await playerRef.current.getCurrent();
       if (!data) return;
-
+      
       const reqdData = {
         progress_ms: Number(data.progress_ms) || 0,
         duration_ms: Number(data.item?.duration_ms || data.duration_ms) || 0,
@@ -43,7 +42,7 @@ function App() {
         is_playing: Boolean(data.is_playing),
         image_src:
           forceImage || !currentSongData.image_src
-            ? `/images/us/image${Math.floor(Math.random() * 18)}.jpg`
+            ? `/images/us/image${Math.floor(Math.random() * 30 + 1)}.jpg`
             : currentSongData.image_src,
       };
       if (reqdData.id && lastFetchedTrackIdRef.current === reqdData.id) {
@@ -135,11 +134,11 @@ function App() {
         <div className="blur-bg"></div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/card" element={<BirthdayCard />} />
           <Route path="/photos" element={<PhotoGallery />} />
           <Route path="/stars" element={<StarryNight />} />
           <Route path="/login" element={<Login />} />
           <Route path="/callback" element={<Callback />} />
+          <Route path="*" element = {<Login />}/>
         </Routes>
         
         {window.location.pathname !== '/login' && (

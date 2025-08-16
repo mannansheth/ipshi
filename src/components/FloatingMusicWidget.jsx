@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPlay, FaPause, FaMusic } from 'react-icons/fa6';
+import { FaPlay, FaPause, FaMusic, FaHeart } from 'react-icons/fa6';
 
 export default function FloatingMusicWidget({ 
   currentSongData, 
@@ -22,6 +22,13 @@ export default function FloatingMusicWidget({
               <FaMusic />
             </div>
           )}
+          <div className="playing-indicator">
+                {isPlaying && <div className="sound-waves">
+                  <div className="wave"></div>
+                  <div className="wave"></div>
+                  <div className="wave"></div>
+                </div>}
+              </div>
         </div>
         
         <div className="song-info">
@@ -30,12 +37,14 @@ export default function FloatingMusicWidget({
           
           <div className="progress-container">
             <div className="progress-bar">
-              <div 
+              <div
                 className="progress-fill"
                 style={{
-                  width: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`
+                  width: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`,
                 }}
-              />
+              >
+                <FaHeart style={{position:"absolute", left: `${(currentSongData.progress_ms / (currentSongData.duration_ms || 1)) * 100}%`, color:"white", fontSize:"1rem", top:"-5px", zIndex:999}} />
+              </div>
             </div>
             <div className="time-display">
               {`${Math.floor(currentSongData.progress_ms / 60000)}:${Math.floor(

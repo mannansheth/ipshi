@@ -11,6 +11,7 @@ import { Link } from "react-router-dom"
 import "../styles/StarryNight.css"
 import { FaSalesforce, FaStar, FaStarOfLife } from 'react-icons/fa';
 import { CSSTransition } from 'react-transition-group';
+import BirthdayCard from "../components/BirthdayCard";
 
 const MoonEmbed = lazy(() => import("../components/MoonEmbed"))
 
@@ -56,7 +57,7 @@ const StarryNight = () => {
       if (visibleCount < polygonPoints.length) {
       const timer = setTimeout(() => {
         setVisibleCount(visibleCount + 1);
-      }, 300); // 100ms delay per polygon
+      }, 300); 
       setTimeout(() => {
         setIsStarSpawned(true);
       },polygonPoints.length*300+1000)
@@ -97,10 +98,13 @@ const StarryNight = () => {
       const now = new Date()
       setCurrentTime(now)
 
-      if (isBirthdayTime()) {
+      if (!isBirthdayTime()) {
         if (currentPanel === 4) {
           setShowShootingStar(true)
-          setTimeout(() => setShowMessage(true), 2000)
+          setTimeout(() => {
+            setShowMessage(true);
+            setShowShootingStar(false);
+          }, 20000)
         }
       }
     }, 1000)
@@ -162,16 +166,16 @@ const StarryNight = () => {
         break
       case 4:
         setShowShootingStar(true)
-        setTimeout(() => {setShowMessage(true); setShowShootingStar(false);}, 10000)
+        setTimeout(() => {setShowMessage(true); setShowShootingStar(false);}, 1000)
         break
     }
   }
 
   const formatTime = (date) => {
     return date.toLocaleString("en-US", {
-      weekday: "long",
+      weekday: "short",
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
@@ -182,9 +186,9 @@ const StarryNight = () => {
   const isBirthdayTime = () => {
     return (
       currentTime.getMonth() === 7 &&
-      currentTime.getDate() === 9 &&
-      currentTime.getHours() === 21 &&
-      currentTime.getMinutes() === 32
+      currentTime.getDate() === 18 &&
+      currentTime.getHours() === 1 &&
+      currentTime.getMinutes() === 45
     )
   }
 
@@ -209,7 +213,7 @@ const StarryNight = () => {
             <h1 className="story-title">The Night You Were Born</h1>
             <p className="story-date">August 18, 2006 • 1:45 AM</p>
             <p className="story-subtitle">
-              The universe held its breath as the most beautiful star was born
+              The shiniest star I've ever seen was born. 
             </p>
           </div>
           <div className="scroll-hint">
@@ -237,7 +241,7 @@ const StarryNight = () => {
           <h2 className="panel-title">The Stars Aligned</h2>
           <p className="panel-text">
             This is exactly how the sky looked when you took your first breath. Every star was perfectly placed, as
-            if the cosmos knew something magical was about to happen.
+            something magical was about to happen.
           </p>
         </div>
       </div>
@@ -313,8 +317,8 @@ const StarryNight = () => {
               alt="Moon phase on your birth night"
               className="moon-image"
             />
-            <label>Udaipur, India</label>
-            <label>1:45 AM | 18th August, 2025.</label>
+            <label>Udaipur</label>
+            <label>1:45 AM | 18th August, 2006.</label>
             {showMoonPhase && <div className="moon-glow"></div>}
 
             {!showMoonPhase && currentPanel >= 3 &&
@@ -340,7 +344,7 @@ const StarryNight = () => {
           <h2 className="panel-title">The Moon's Blessing</h2>
           <p className="panel-text">
             {showMoonPhase
-              ? "The moon was waning, making space for new beginnings. It knew you were coming."
+              ? "A beautiful waning crescent."
               : "Tap to see the moon phase from that night"}
           </p>
           {!showMoonPhase && <div className="tap-hint">👆 Tap to reveal</div>}
@@ -362,25 +366,12 @@ const StarryNight = () => {
           )}
         </div>
 
-        {showMessage && (
+        {showMessage && currentPanel >=3 && (
           <div className="love-message">
-            <div className="message-content">
-              <h2>✨ My Shooting Star ✨</h2>
-              <p>
-                On this exact moment, 18 years ago, you streaked into my universe like the most beautiful shooting star.
-                You lit up everything around you and made all my wishes come true.
-              </p>
-              <p>
-                Every night since then, I look up at the stars and think of you. You are my constellation, my moon, my
-                entire night sky.
-              </p>
-              <p className="birthday-wish">
-                Happy Birthday, my beautiful star. May this new year bring you all the magic you bring to my world.
-              </p>
-              <p className="signature">Forever yours, under these same stars 🌟</p>
-              {isBirthdayTime() && <div className="special-moment">🎉 It's exactly 1:45 AM on August 18th! 🎉</div>}
-            </div>
+
+            <BirthdayCard />
           </div>
+
         )}
 
         {!showShootingStar && (

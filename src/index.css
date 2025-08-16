@@ -85,7 +85,7 @@ code {
   bottom: 5%;
   left: 10%;
   right: 10%;
-  background: linear-gradient(135deg, rgba(255, 240, 245, 0.95), rgba(240, 230, 255, 0.95), rgba(230, 243, 255, 0.95));
+  background: linear-gradient(135deg, rgba(246, 224, 150, 0.95), rgba(201, 186, 223, 0.7), rgba(198, 223, 247, 0.95));
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 24px;
@@ -109,6 +109,7 @@ code {
   position: relative;
   padding: 24px;
   text-align: center;
+  font-weight:500;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -147,9 +148,9 @@ code {
 
 .player-title {
   margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #d8a7ca, #b19cd9, #87ceeb);
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #5372d7, #7b47dc, #afcfdc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -323,7 +324,8 @@ code {
   height: 6px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 3px;
-  overflow: hidden;
+
+  position: relative;
 }
 
 .progress-fill {
@@ -385,8 +387,8 @@ code {
 
 .search-container {
   position: relative;
-  max-width: 500px;
-  margin: 0 auto;
+  max-width: 300px;
+  margin: 0 ;
 }
 
 .search-icon {
@@ -424,6 +426,9 @@ code {
   padding: 0 24px 24px;
   max-height: 400px;
   overflow-y: auto;
+  display:grid;
+  grid-template-columns: repeat(1, 1fr);
+  
 }
 
 .track-item {
@@ -478,20 +483,18 @@ code {
 }
 
 .play-overlay {
-  opacity: 0;
+  opacity: 1;
   color: #d8a7ca;
   font-size: 18px;
   transition: all 300ms;
 }
 
-.track-item:hover .play-overlay {
-  opacity: 1;
-}
+
 
 /* Added floating music widget styles */
 .floating-music-widget {
   position: fixed;
-  bottom: 100px;
+  bottom: 30px;
   right: 30px;
   width: 320px;
   background: linear-gradient(135deg, rgba(255, 240, 245, 0.95), rgba(240, 230, 255, 0.95));
@@ -522,6 +525,7 @@ code {
   height: 60px;
   border-radius: 12px;
   overflow: hidden;
+  position: relative;
   flex-shrink: 0;
 }
 
@@ -577,7 +581,7 @@ code {
   height: 4px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 2px;
-  overflow: hidden;
+
 }
 
 .progress-fill {
@@ -782,7 +786,7 @@ code {
   .floating-music-widget {
     width: 280px;
     right: 16px;
-    bottom: 100px;
+    bottom: 10px;
   }
 
   .music-player {

@@ -41,14 +41,14 @@ body {
   height:100vh;
   width:50vw;
   justify-content: space-around;
-  gap: 2rem;
+  gap: 1rem;
 }
 .card-inside.notopen {
   display:none;
 }
 .birthday-card {
   width: 100%;
-  height: 75%;
+  height: 100%;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.8s ease;
@@ -64,7 +64,7 @@ body {
 .card-inside {
   position: absolute;
   width: 100%;
-  height: 50vh;
+  height: 80vh;
   backface-visibility: hidden;
 
   border-radius: 20px;
@@ -72,7 +72,7 @@ body {
 }
 
 .card-front {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  background: linear-gradient(135deg, #ffecd2ca 0%, #fbff0099 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,10 +112,11 @@ body {
 .cake-icon {
   font-size: 4rem;
   animation: float 3s ease-in-out infinite;
+  text-align:center;
 }
 
 .card-inside {
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  background: linear-gradient(135deg, #ffecd2ca 0%, #fbff0099 100%);
   transform: rotateY(180deg);
   display: flex;
   overflow: hidden;
@@ -129,6 +130,9 @@ body {
   height:100%;
   flex-direction: column;
   justify-content: center;
+}
+.left-panel {
+  flex:4;
 }
 
 .birthday-message {
@@ -148,16 +152,16 @@ body {
   color: #5d4037;
   line-height: 1.6;
   margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  text-align:left;
 }
 
-.signature {
+.signature-letter {
   font-style: italic;
-  text-align: right;
+  text-align: left;
   margin-top: 2rem !important;
-  color: #8b4513 !important;
+  color: #8e6d00 ;
 }
-
 .right-panel {
   position: relative;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
@@ -229,19 +233,24 @@ body {
 @media (max-width: 768px) {
   .birthday-card {
     width: 90vw;
-    height: 300px;
+    height: 50vh;
   }
-
+  .card-front {
+    height:50vh;
+  }
   .left-panel,
   .right-panel {
     padding: 1rem;
   }
-
+  .card-inside {
+    height:50vh;
+  }
   .birthday-message h3 {
     font-size: 1.4rem;
   }
 
   .birthday-message p {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    
   }
 }

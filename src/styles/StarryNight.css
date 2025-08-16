@@ -238,9 +238,9 @@
 }
 
 .moon-image {
-  width:160px;
+  width:180px;
   mix-blend-mode: color-dodge;
-  height:120px;
+  height:160px;
   opacity:0;
   border-radius:100%;
   transition: all 2s ease;
@@ -310,11 +310,12 @@
   position: absolute;
   top: -2px;
   right: 0;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  filter:blur(100px);
+  height: 10px;
   color: rgb(255, 208, 90);
   filter:brightness(2);
-  animation: shootingStar 10s ease-out;
+  animation: shootingStar 20s ease-out;
   background: radial-gradient(circle, #ffd700, transparent);
   border-radius: 50%;
   box-shadow: 0 0 20px #ffd700;
@@ -572,8 +573,8 @@
   }
   .moon canvas {
     
-    width:750px !important;
-    height:500px !important;
+    width:900px !important;
+    height:700px !important;
   }
   .moon {
     margin-bottom:200px;
