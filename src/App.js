@@ -99,7 +99,7 @@ function App() {
       return (
         now.getMonth() === 7 &&
         now.getDate() === 18 &&
-        now.getHours() === 1 &&
+        now.getHours() >= 1 &&
         now.getMinutes() >= 44
       )
     }

@@ -85,7 +85,7 @@ const Home = ({isBirthdayTime, ready}) => {
         </div>
         
         <div className={`error-message gallery ${displayGalleryError ? 'revealed':""}`}> 
-          <p>Page will open in {Math.floor((new Date(2025, 7, 18, 0, 0) - new Date()) / 60000)  
+          <p>Page will open in {Math.floor((new Date(2025, 7, 18, 0, 0) - new Date()) / 60000 )  
           } mins</p>
           {!ready && 
             "Go connect spotify and chill"
