@@ -14,8 +14,8 @@ const Login = () => {
     const handleSubmit = () => {
         const inpPass = document.getElementById("pass-input");
         const btn = document.getElementById("submit-btn");
-        if (inpPass.value === "18-08-2006") {
-            localStorage.setItem("code", "18-08-2006")
+        if (inpPass.value === "18/08/2006") {
+            localStorage.setItem("code", "18/08/2006")
             window.location.pathname = "/"
         } else {
             if (countWrong >= 4) {
@@ -24,11 +24,16 @@ const Login = () => {
             else {
                 inpPass.value = "";
                 inpPass.focus();
-                inpPass.style.width = (countWrong+1)*300 + "px";
-                inpPass.style.fontSize = (countWrong+1)*30 + "px";
-                btn.style.width = (countWrong+1)*200 + "px";
-                btn.style.fontSize = (countWrong+1)*20 + "px";
-                btn.innerText = countWrong === 0 ? "Try harder" : countWrong === 1 ? "Come on you can do this" : "it is easy";
+                inpPass.style.width = (countWrong+1)*200 + "px";
+                inpPass.style.fontSize = (countWrong+1)*20 + "px";
+                btn.style.width = (countWrong+1)*100 + "px";
+                btn.style.fontSize = (countWrong+1)*10 + "px";
+                btn.innerText = 
+                    countWrong === 0 ? "Try harder" : 
+                    countWrong === 1 ? "Come on you can do this" : 
+                    countWrong === 2 ? "TRYYYYYY" : 
+                    countWrong === 3 ? "Last chance😞" : 
+                    "it is easy";
                 setCountWrong(countWrong+1);
             }
         }

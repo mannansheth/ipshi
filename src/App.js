@@ -22,7 +22,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   
   useEffect(() => {
-    if (localStorage.getItem("code") !== "18-08-2006" && window.location.pathname !== "/login") {
+    if (localStorage.getItem("code") !== "18/08/2006" && window.location.pathname !== "/login") {
       window.location.href = "/login";
     }
   }, []);

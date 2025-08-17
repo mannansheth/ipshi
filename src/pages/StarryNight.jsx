@@ -228,8 +228,7 @@ const StarryNight = ({isBirthdayTime}) => {
         <div className="panel-content">
           <h2 className="panel-title">The Stars Aligned</h2>
           <p className="panel-text">
-            This is exactly how the sky looked when you took your first breath. Every star was perfectly placed, as
-            something magical was about to happen.
+            This is exactly how the sky looked when you took your first breath. Every star was perfectly placed.
           </p>
         </div>
       </div>
