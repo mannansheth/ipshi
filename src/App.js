@@ -100,7 +100,7 @@ function App() {
         now.getMonth() === 7 &&
         now.getDate() === 18 &&
         now.getHours() >= 1 &&
-        now.getMinutes() >= 44
+        now.getMinutes() >= 0
       )
     }
   // Autoplay playlist on ready (if available)
