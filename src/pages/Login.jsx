@@ -14,8 +14,8 @@ const Login = () => {
     const handleSubmit = () => {
         const inpPass = document.getElementById("pass-input");
         const btn = document.getElementById("submit-btn");
-        if (inpPass.value === "Mannan Sheth") {
-            localStorage.setItem("code", "Mannan Sheth")
+        if (inpPass.value === "Ipshi") {
+            localStorage.setItem("code", "Ipshi")
             window.location.pathname = "/"
         } else {
             if (countWrong >= 4) {
