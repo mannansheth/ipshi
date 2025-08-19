@@ -39,7 +39,8 @@ const Home = ({isBirthdayTime, ready}) => {
 
       <div className="home-content">
         <h1 className="main-title">Happy Birthday Ipshi</h1>
-        <p className="subtitle">A website made just for you ✨</p>
+        <h2 className="subtitle">You got it correct baby who's the boss</h2>
+        {/* <p className="subtitle">A website made just for you ✨</p> */}
         
         <div className="navigation-cards">
           {new Date().getDate() >=18 ?
