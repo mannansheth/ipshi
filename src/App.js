@@ -10,6 +10,7 @@ import { detectProvider, initPlayer } from "./services/playerAdapter";
 import MusicPlayer from "./components/MusicPlayer"
 import FloatingMusicWidget from "./components/FloatingMusicWidget"
 import Callback from "./pages/Callback"
+import Timeline from "./pages/Timeline"
 
 function App() {
   const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false);
@@ -22,7 +23,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   
   useEffect(() => {
-    if (localStorage.getItem("code") !== "18/08/2006" && window.location.pathname !== "/login") {
+    if (localStorage.getItem("code") !== "Mannan Sheth" && window.location.pathname !== "/login") {
       window.location.href = "/login";
     }
   }, []);
@@ -147,6 +148,7 @@ function App() {
           <Route path="/stars" element={<StarryNight isBirthdayTime={isBirthdayTime} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/callback" element={<Callback />} />
+          <Route path="/timeline" element={<Timeline />} />
           <Route path="*" element = {<Login />}/>
         </Routes>
         

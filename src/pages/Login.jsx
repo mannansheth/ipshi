@@ -14,8 +14,8 @@ const Login = () => {
     const handleSubmit = () => {
         const inpPass = document.getElementById("pass-input");
         const btn = document.getElementById("submit-btn");
-        if (inpPass.value === "18/08/2006") {
-            localStorage.setItem("code", "18/08/2006")
+        if (inpPass.value === "Mannan Sheth") {
+            localStorage.setItem("code", "Mannan Sheth")
             window.location.pathname = "/"
         } else {
             if (countWrong >= 4) {
@@ -44,8 +44,8 @@ const Login = () => {
         <center>
             {!isWrong ? 
             <>
-            <h2>Enter password: </h2>
-            <input type="password" placeholder="(its a special date)" id='pass-input'></input>
+            <h2>Who's the boss: </h2>
+            <input type="password" placeholder="(full name)" id='pass-input'></input>
             <p>****5 tries only</p>
             <button onClick={handleSubmit} id="submit-btn">Submit</button>
             </>
