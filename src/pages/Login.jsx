@@ -45,7 +45,7 @@ const Login = () => {
             {!isWrong ? 
             <>
             <h2>Who's the boss: </h2>
-            <input type="password" placeholder="(full name)" id='pass-input'></input>
+            <input type="password" placeholder="(the actual boss)" id='pass-input'></input>
             <p>****5 tries only</p>
             <button onClick={handleSubmit} id="submit-btn">Submit</button>
             </>
