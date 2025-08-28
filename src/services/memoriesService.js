@@ -31,14 +31,20 @@ export const getMemoriesForMonth = async  (year, month) => {
 // Add a new memory
 export const addMemory = async (memoryData) => {
   try {
-    console.log(memoryData);
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    var currentuser = "";
+    if (/iPhone|iPad|iPod/i.test(userAgent)) {
+      currentuser = "Ipshi"
+    } else {
+      currentuser = "Mannan"
+    }
     const newMemory = new FormData();
     newMemory.append("DateOfMemory", memoryData.date);
     newMemory.append("Title", memoryData.title);
     newMemory.append("Description", memoryData.description);
     newMemory.append("Location", memoryData.location);
     newMemory.append("CreatedDate", new Date().toISOString());
-    newMemory.append("CreatedBy", "Mannan")
+    newMemory.append("CreatedBy", currentuser)
     memoryData.imageUrl.forEach((file) => {
       newMemory.append("files", file); 
     });

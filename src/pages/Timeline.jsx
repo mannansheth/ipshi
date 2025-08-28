@@ -185,12 +185,12 @@ const Timeline = () => {
                         {
                           ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="gold"/> 
                           : 
-                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="blue"/>
+                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="white"/>
                           :
                         ""} <span>{day}</span> {
                           ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="gold"/> 
                           :
-                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="blue"/>
+                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="white"/>
                           :
                           ""
                         }
@@ -198,7 +198,16 @@ const Timeline = () => {
                       {memory && (
                         <div className="memory-preview" >
                           {memory.files && (
-                            <div className="memory-image" style={{ backgroundImage: `url(${memory.files.filter(f => f.type.includes("image"))[0].url})`}}></div>
+                            <div className="memory-image" 
+                            style={{
+                              backgroundImage: `url(${
+                                memory.files[0].type.includes("image")
+                                  ? memory.files[0].url
+                                  : memory.files[0].url.replace("/upload/", "/upload/so_1s/").replace(".mp4", ".jpg")
+                              })`,
+                            }}>
+
+                            </div>
                           )}
                           {/* <div className="memory-indicator"></div> */}
                         </div>
