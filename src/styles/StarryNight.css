@@ -382,6 +382,8 @@
   background: linear-gradient(45deg, #ff6b6b, #ffd700);
   padding: 1rem;
   border-radius: 10px;
+  width:50%;
+  margin:0 auto;
   margin-top: 1.5rem;
   font-weight: bold;
   animation: celebration 2s ease-in-out infinite;
@@ -601,11 +603,13 @@
   right:1%;
   width:40%;
   z-index:1;
-  transition:0.3s ease;
+  opacity:1;
+  transition: all 0.3s ease;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .time-display.collapse {
       width:5%;
+      opacity:0;
       top:0%;
       right:0%;
       font-size:0.1rem;

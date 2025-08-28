@@ -4,7 +4,9 @@
   background: linear-gradient(135deg, #ecfeff 0%, #f0f9ff 50%, #fef3f2 100%);
   overflow-x: hidden;
 }
-
+.back-button {
+  background:linear-gradient(120deg, rgb(0, 176, 138), rgb(94, 94, 255))
+}
 .timeline-background {
   position: fixed;
   top: 0;
@@ -29,7 +31,7 @@
   font-weight: 700;
   color: #164e63;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #164e63, #10b981);
+  background: linear-gradient(135deg, #77dbff, #003c28);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,7 +84,7 @@
 .month-year {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #164e63;
+  color: #257390;
   text-align: center;
   min-width: 250px;
 }
@@ -153,7 +155,43 @@
   transform: translateY(-5px) scale(1.05);
   box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
 }
+.day-cell.her-bday {
+  border: 7px solid gold;
+}
+.day-cell.her-bday span {
+  
+  font-family: "Knewave", system-ui;
+  font-weight: 300;
+  font-style:normal;
+  color:rgb(255, 255, 165);
+  font-size:1.5rem;
+}
+.day-cell.anniversary {
+  border: 7px solid rgb(88, 88, 255);
+}
+.day-cell.anniversary span {
+  font-family: "Sarina", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color:rgb(119, 216, 255);
+  font-size:1.7rem;
+}
+.day-cell.basic {
+  border: 7px solid transparent;
+}
+@media (max-width:468px) {
+  .day-cell.her-bday {
+  border: 3px solid gold;
+}
+  .day-cell.anniversary {
+    border: 3px solid blue;
+  }
+  .day-cell.basic {
+    border: 3px solid transparent;
+  }
+  
 
+}
 .day-number {
   font-weight: 600;
   font-size: 1.1rem;
@@ -162,7 +200,7 @@
   top:40%;
 }
 .day-number.has-memory {
-  top:70%;
+  top:65%;
 }
 .memory-preview {
   position: absolute;
@@ -170,7 +208,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 13px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -420,5 +458,18 @@
 
   .calendar-navigation {
     margin-bottom: 1.5rem;
+  }
+  .day-number {
+    font-size: 0.7rem;
+  }
+  .day-number.has-memory {
+    top:70%;
+    font-size:0.6rem;
+  }
+  .anniversary div {
+    font-size:0.55rem;
+  }
+  .day-cell.her-bday span, .day-cell.anniversary span {
+    font-size:0.6rem;
   }
 }

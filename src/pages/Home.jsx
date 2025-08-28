@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import "../styles/Home.css"
 import { FaSun } from "react-icons/fa"
+import { FaCalendar } from "react-icons/fa6"
 
 const Home = ({isBirthdayTime, ready}) => {
   const [mounted, setMounted] = useState(false)
@@ -43,6 +44,11 @@ const Home = ({isBirthdayTime, ready}) => {
         {/* <p className="subtitle">A website made just for you ✨</p> */}
         
         <div className="navigation-cards">
+          <Link to="/timeline" className="nav-card photos-theme">
+            <div className="card-icon">📅</div>
+            <h3>Our timeline</h3>
+            <p>All our memories by date</p>
+          </Link>
           {new Date().getDate() >=18 ?
           <Link to="/photos" className="nav-card photos-theme">
             <div className="card-icon">📸</div>

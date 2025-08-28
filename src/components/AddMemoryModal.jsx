@@ -36,7 +36,7 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded, memory }
   }, [isOpen])
 
   const validateForm = () => {
-    const newErrors = errors
+    const newErrors = {}
 
     if (!formData.title.trim()) {
       newErrors.title = "Title is required"
@@ -59,7 +59,7 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded, memory }
   }
 
   const handleImageChange = e => {
-    const allowedExtensions = "mp4, jpg, png, webp"
+    const allowedExtensions = "mp4, jpg, png, webp, jpeg"
     setErrors(prev => ({
         ...prev,
         "imageUrl" : ""
@@ -114,18 +114,15 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded, memory }
   }
 
   const handleSubmit = async (e) => {
-    console.log("Hello")
     e.preventDefault()
 
     if (!validateForm()) {
-      console.log("vvvvv")
+      console.log(errors)
       return
     }
-    console.log(formData)
     setIsSubmitting(true)
 
     try {
-      console.log(formData)
       const newMemory = await memoriesService.addMemory(formData)
       onMemoryAdded && onMemoryAdded(newMemory)
       onClose()
@@ -209,7 +206,7 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded, memory }
               onChange={handleInputChange}
               placeholder="bigger description"
               className={`form-textarea ${errors.description ? "error" : ""}`}
-              rows="4"
+              rows="4"  
 
             />
             {errors.description && <span className="error-message timeline">{errors.description}</span>}
@@ -271,16 +268,9 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded, memory }
                             
                             />
                             }
-
-
-                    
                         </div>
                     ))}
                 </>
-                
-                
-              
-              
             }
           </div>
 

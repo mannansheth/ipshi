@@ -5,7 +5,9 @@ import * as memoriesService from "../services/memoriesService"
 import MemoryDisplayModal from "../components/MemoryDisplayModal"
 import AddMemoryModal from "../components/AddMemoryModal"
 import "../styles/Timeline.css"
-import { FaStar } from "react-icons/fa6"
+import { FaAnglesLeft, FaAnglesRight, FaArrowLeft, FaArrowLeftLong, FaArrowRightLong, FaChevronLeft, FaStar } from "react-icons/fa6"
+import { Link } from "react-router"
+import { FaArrowCircleLeft } from "react-icons/fa"
 
 const Timeline = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -98,7 +100,7 @@ const Timeline = () => {
     newDate.setMonth(currentDate.getMonth() + direction)
     setCurrentDate(newDate)
   }
-
+  
   const monthNames = [
     "January",
     "February",
@@ -118,6 +120,9 @@ const Timeline = () => {
 
   return (
     <div className="timeline-container">
+      <Link to="/" className="back-button">
+        ← Back Home
+      </Link>
       <div className="timeline-background"></div>
 
       <header className="timeline-header">
@@ -127,17 +132,28 @@ const Timeline = () => {
 
       <div className="calendar-container">
         <div className="calendar-navigation">
-          <button className="nav-button prev" onClick={() => navigateMonth(-1)}>
-            ←
+          <div>
+          <button className="nav-button prev" onClick={() => navigateMonth(-12)}>
+            <FaAnglesLeft />
           </button>
+          <button className="nav-button prev" onClick={() => navigateMonth(-1)}>
+            <FaArrowLeftLong />
+          </button>
+          </div>
+          
 
           <h2 className="month-year">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h2>
-
-          <button className="nav-button next" onClick={() => navigateMonth(1)}>
-            →
-          </button>
+          <div>
+            <button className="nav-button next" onClick={() => navigateMonth(1)}>
+              <FaArrowRightLong />
+            </button>
+            <button className="nav-button next" onClick={() => navigateMonth(12)}>
+              <FaAnglesRight />
+            </button>
+          </div>
+          
         </div>
 
         <div className="calendar-grid">
@@ -155,30 +171,30 @@ const Timeline = () => {
               return (
                 <div
                   key={index}
-                  className={`day-cell ${day ? "active" : "empty"} ${memory ? "has-memory" : ""}`}
-                  style={{border:((day===18) && currentDate.getMonth() === 7) ? "7px solid yellow"
+                  className={`day-cell ${day ? "active" : "empty"} ${memory ? "has-memory" : ""} 
+                  ${((day===18) && currentDate.getMonth() === 7) ? "her-bday"
                      : 
-                     ((day===21) && currentDate.getMonth() === 9) ? "7px solid blue"
+                     ((day===21) && currentDate.getMonth() === 9) ? "anniversary"
                      :
-                     "4px transparent" }}
+                     "basic"}`}
                   onClick={() => handleDayClick(day)}
                 >
                   {day && (
                     <>
-                      <span className={`day-number ${memory ? "has-memory" : ""}`}>
+                      <div className={`day-number ${memory ? "has-memory" : ""}`}>
                         {
-                          ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="yellow"/> 
+                          ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="gold"/> 
                           : 
                           ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="blue"/>
                           :
-                        ""} {day} {
-                          ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="yellow"/> 
+                        ""} <span>{day}</span> {
+                          ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="gold"/> 
                           :
                           ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="blue"/>
                           :
                           ""
                         }
-                        </span>
+                        </div>
                       {memory && (
                         <div className="memory-preview" >
                           {memory.files && (
