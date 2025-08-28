@@ -1,85 +1,218 @@
-import React from "react";
-import "../styles/Timeline.css";
+"use client"
+
+import { useState, useEffect } from "react"
+import * as memoriesService from "../services/memoriesService"
+import MemoryDisplayModal from "../components/MemoryDisplayModal"
+import AddMemoryModal from "../components/AddMemoryModal"
+import "../styles/Timeline.css"
 
 const Timeline = () => {
-  const years = [2023, 2024, 2025];
-  const months = [
-    "January","February","March","April","May","June","July",
-    "August","September","October","November","December"
-  ];
-  const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  const [currentDate, setCurrentDate] = useState(new Date())
+  const [memories, setMemories] = useState([])
+  const [selectedMemory, setSelectedMemory] = useState(null)
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [showMemoryModal, setShowMemoryModal] = useState(false)
 
-  // helper: get number of days in a month
-  const getDaysInMonth = (year, monthIndex) => {
-    return new Date(year, monthIndex + 1, 0).getDate();
-  };
+  useEffect(() => {
+    loadMemories()
+  }, [currentDate])
 
-  // helper: get first day of the month (0=Sunday → shift to Mon=0)
-  const getFirstDayOfMonth = (year, monthIndex) => {
-    let d = new Date(year, monthIndex, 1).getDay(); 
-    return d === 0 ? 6 : d - 1; // adjust so Mon=0, Sun=6
-  };
+  const loadMemories = async () => {
+    const year = currentDate.getFullYear()
+    const month = currentDate.getMonth()
+    const monthMemories = await memoriesService.getMemoriesForMonth(year, month)
+    console.log(monthMemories)
+    setMemories(monthMemories)
+  }
+
+  const getDaysInMonth = (date) => {
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const firstDay = new Date(year, month, 1)
+    const lastDay = new Date(year, month + 1, 0)
+    const daysInMonth = lastDay.getDate()
+    const startingDayOfWeek = firstDay.getDay()
+
+    const days = []
+
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      days.push(null)
+    }
+
+    // Add all days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      days.push(day)
+    }
+
+    return days
+  }
+
+  const getMemoryForDate = (day) => {
+    if (!day) return null
+    const dateString = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`
+    return memories.find((memory) => memory.DateOfMemory === dateString)
+  }
+
+  const handleMemoryAdded = (newMemory) => {
+    loadMemories() // Reload memories to show the new one
+  }
+
+  const handleMemoryEdit = (memory) => {
+    setSelectedMemory(memory)
+    setSelectedDate(memory.date)
+    setShowMemoryModal(false)
+    setShowAddModal(true)
+  }
+
+  const handleMemoryDelete = async (memoryId) => {
+    try {
+      await memoriesService.deleteMemory(memoryId)
+      loadMemories()
+      setShowMemoryModal(false)
+      setSelectedMemory(null)
+    } catch (error) {
+      console.error("Error deleting memory:", error)
+    }
+  }
+
+  const handleDayClick = (day) => {
+    if (!day) return
+
+    const dateString = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`
+    console.log(dateString)
+    const memory = getMemoryForDate(day)
+
+    if (memory) {
+      setSelectedMemory(memory)
+      setShowMemoryModal(true)
+    } else {
+      setSelectedDate(dateString)
+      setShowAddModal(true)
+    }
+  }
+
+  const navigateMonth = (direction) => {
+    const newDate = new Date(currentDate)
+    newDate.setMonth(currentDate.getMonth() + direction)
+    setCurrentDate(newDate)
+  }
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]
+
+  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
   return (
-    <div className="timeline">
-      {years.map((y) =>
-        months.map((m, j) => {
-          // filter out based on your conditions
-          if (!(y === 2023 && j < 9) && !(y === 2024 && j < 5)) {
-            const daysInMonth = getDaysInMonth(y, j);
-            const firstDay = getFirstDayOfMonth(y, j);
+    <div className="timeline-container">
+      <div className="timeline-background"></div>
 
-            // build weeks
-            const weeks = [];
-            let day = 1 - firstDay; // so first row aligns correctly
-            while (day <= daysInMonth) {
-              let week = [];
-              for (let i = 0; i < 7; i++) {
-                if (day < 1 || day > daysInMonth) {
-                  week.push(""); // empty cell
-                } else {
-                  week.push(day);
-                }
-                day++;
-              }
-              weeks.push(week);
-            }
+      <header className="timeline-header">
+        <h1 className="timeline-title">Our Memory Timeline</h1>
+        <p className="timeline-subtitle">Every moment we've shared together</p>
+      </header>
 
-            return (
-              <div key={`${m}-${y}`} id={`month-${m}-${y}`} className="month">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th colSpan={7} className="month-header">
-                        {m}, {y}
-                      </th>
-                    </tr>
-                    <tr>
-                      {days.map((d) => (
-                        <th key={d}>{d}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {weeks.map((week, wi) => (
-                      <tr key={wi}>
-                        {week.map((d, di) => (
-                          <td key={di} className={d ? "day-cell" : "empty"} id={`${d}-${j}-${y}`} style={{background:`url(/images/us/image${d}.jpg)`}}>
-                            <dialog>{d}</dialog>
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+      <div className="calendar-container">
+        <div className="calendar-navigation">
+          <button className="nav-button prev" onClick={() => navigateMonth(-1)}>
+            ←
+          </button>
+
+          <h2 className="month-year">
+            {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+          </h2>
+
+          <button className="nav-button next" onClick={() => navigateMonth(1)}>
+            →
+          </button>
+        </div>
+
+        <div className="calendar-grid">
+          <div className="weekdays">
+            {weekDays.map((day) => (
+              <div key={day} className="weekday">
+                {day}
               </div>
-            );
-          }
-          return null;
-        })
-      )}
-    </div>
-  );
-};
+            ))}
+          </div>
 
-export default Timeline;
+          <div className="days-grid">
+            {getDaysInMonth(currentDate).map((day, index) => {
+              const memory = getMemoryForDate(day)
+              return (
+                <div
+                  key={index}
+                  className={`day-cell ${day ? "active" : "empty"} ${memory ? "has-memory" : ""}`}
+                  onClick={() => handleDayClick(day)}
+                >
+                  {day && (
+                    <>
+                    {day === 21 &&  currentDate.getMonth() === 9 && <b>SPECIAL</b>} 
+                      <span className="day-number">{day}</span>
+                      {memory && (
+                        <div className="memory-preview">
+                          {memory.files && (
+                            <div className="memory-image" style={{ backgroundImage: `url(${memory.files.filter(f => f.type.includes("image"))[0].url})` }}></div>
+                          )}
+                          {/* <div className="memory-indicator"></div> */}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* <button
+        className="add-memory-fab"
+        onClick={() => {
+          setSelectedDate(new Date().toISOString().split("T")[0])
+          setShowAddModal(true)
+        }}
+      >
+        +
+      </button> */}
+
+      {/* Memory Display Modal */}
+      <MemoryDisplayModal
+        memory={selectedMemory}
+        isOpen={showMemoryModal}
+        onClose={() => {
+          setShowMemoryModal(false)
+          setSelectedMemory(null)
+        }}
+        onEdit={handleMemoryEdit}
+        onDelete={handleMemoryDelete}
+      />
+
+      <AddMemoryModal
+        isOpen={showAddModal}
+        onClose={() => {
+          setShowAddModal(false)
+          setSelectedDate(null)
+          setSelectedMemory(null)
+        }}
+        selectedDate={selectedDate}
+        onMemoryAdded={handleMemoryAdded}
+      />
+    </div>
+  )
+}
+
+export default Timeline

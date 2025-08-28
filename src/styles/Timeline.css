@@ -1,85 +1,421 @@
-.timeline {
-    background: linear-gradient(250deg, rgb(200, 200, 200), rgb(122, 209, 122), rgb(96, 96, 242), rgb(255, 255, 41), rgb(238, 0, 255), rgb(0, 0, 0));
-    height:100%;
-    color:white;  
-    display: flex;
-  flex-direction: column;
-  align-items: center;  
-
-  width:100%;
+.timeline-container {
+  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(135deg, #ecfeff 0%, #f0f9ff 50%, #fef3f2 100%);
+  overflow-x: hidden;
 }
 
-.month {
-  border-radius: 10px;
-  margin:0 5%;
-    padding:0 2%;
-  width:90%;
-  height:100vh;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  display:flex;
-  justify-content: center;
-  align-items: center;
+.timeline-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(22, 78, 99, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(236, 254, 255, 0.8) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
-.table {
-  border-collapse: collapse;
+.timeline-header {
   text-align: center;
-  border: 2px solid rgb(0, 0, 0);
-  background: linear-gradient(200deg, rgb(75, 170, 148), rgb(114, 139, 215));
-}
-
-.month-header {
-  font-size: 2rem;
-  padding: 5px;
-  font-weight:bold;
-  background: linear-gradient(135deg, white, rgb(245, 70, 70), white, white);
-  -webkit-background-clip: text;   /* clip background to text */
-  -webkit-text-fill-color: transparent; /* make text transparent so gradient shows */
-}
-
-.day-cell {
+  padding: 3rem 1rem 2rem;
   position: relative;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
-
-
-.day-cell span {
-  position: relative;
-  z-index: 1;
-  font-weight:bold;
-  font-size:1.1rem;
+.timeline-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #164e63;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #164e63, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp 1s ease-out;
 }
 
-.table th,
-.table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  min-width: 10vw;
-  height: 9.5vh;
-}
-@media (max-width:468px) {
-    .table th,
-    .table td {
-
-    min-width: 4vw;
-    height: 9.5vh;
-    }
-}
-.day-cell {
-
-  cursor: pointer;
-  color:black;
-  transition: background 0.3s;
+.timeline-subtitle {
+  font-size: 1.1rem;
+  color: #475569;
+  opacity: 0.8;
+  animation: fadeInUp 1s ease-out 0.2s both;
 }
 
-.day-cell:hover {
-  background-color: #d1f0d1;
+.calendar-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+  animation: fadeInUp 1s ease-out 0.4s both;
 }
 
-.empty {
-  background: transparent;
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.nav-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   border: none;
+  background: #ecfeff;
+  color: #164e63;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(22, 78, 99, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.nav-button:hover {
+  background: #164e63;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(22, 78, 99, 0.2);
+}
+
+.month-year {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #164e63;
+  text-align: center;
+  min-width: 250px;
+}
+
+.calendar-grid {
+  background: #ecfeff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(22, 78, 99, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(236, 254, 255, 0.5);
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.day-cell.empty {
+  cursor: default;
+  opacity: 0;
+}
+
+.day-cell.active:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(22, 78, 99, 0.15);
+  border-color: #10b981;
+}
+
+.day-cell.has-memory {
+  background: linear-gradient(135deg, #10b981, #10b981);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.day-cell.has-memory:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+}
+
+.day-number {
+  font-weight: 600;
+  font-size: 1.1rem;
+  z-index: 2;
+  position: relative;
+}
+
+.memory-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+.memory-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(0px) brightness(0.7);
+  opacity: 0.6;
+}
+
+.memory-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.add-memory-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #10b981, #10b981);
+  color: #ffffff;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.add-memory-fab:hover {
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.memory-modal {
+  background: #ecfeff;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideInUp 0.4s ease-out;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.1);
+  color: #475569;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #e11d48;
+  color: #ffffff;
+}
+
+.memory-content {
+  padding: 2rem;
+}
+
+.memory-image-full {
+  margin-bottom: 1.5rem;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.memory-image-full img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.memory-details {
+  text-align: center;
+}
+
+.memory-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #164e63;
+  margin-bottom: 0.5rem;
+}
+
+.memory-date {
+  color: #475569;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.memory-location {
+  color: #10b981;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.memory-description {
+  color: #475569;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .timeline-title {
+    font-size: 2rem;
+  }
+
+  .calendar-container {
+    padding: 0 0.5rem 2rem;
+  }
+
+  .calendar-grid {
+    padding: 1rem;
+  }
+
+  .days-grid {
+    gap: 0.5rem;
+  }
+
+  .day-cell {
+    border-radius: 10px;
+  }
+
+  .day-number {
+    font-size: 0.9rem;
+  }
+
+  .memory-modal {
+    width: 95%;
+    margin: 1rem;
+  }
+
+  .memory-content {
+    padding: 1.5rem;
+  }
+
+  .add-memory-fab {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-header {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .timeline-title {
+    font-size: 1.8rem;
+  }
+
+  .month-year {
+    font-size: 1.4rem;
+    min-width: 200px;
+  }
+
+  .nav-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .calendar-navigation {
+    margin-bottom: 1.5rem;
+  }
 }

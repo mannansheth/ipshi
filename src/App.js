@@ -99,7 +99,7 @@ function App() {
     const now = new Date()
       return (
         now.getMonth() === 7 &&
-        now.getDate() === 18 &&
+        now.getDate() >= 18 &&
         now.getHours() >= 1 &&
         now.getMinutes() >= 0
       )
@@ -150,6 +150,7 @@ function App() {
           <Route path="/callback" element={<Callback />} />
           <Route path="/timeline" element={<Timeline />} />
           <Route path="*" element = {<Login />}/>
+          <Route path='/card' element={<BirthdayCard /> } />
         </Routes>
         
         {window.location.pathname !== '/login' && (
