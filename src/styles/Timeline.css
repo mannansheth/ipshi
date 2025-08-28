@@ -128,7 +128,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   background: #ffffff;
-  border: 2px solid transparent;
+  border: solid ;
   overflow: hidden;
 }
 
@@ -158,9 +158,12 @@
   font-weight: 600;
   font-size: 1.1rem;
   z-index: 2;
-  position: relative;
+  position: absolute;
+  top:40%;
 }
-
+.day-number.has-memory {
+  top:70%;
+}
 .memory-preview {
   position: absolute;
   top: 0;
@@ -179,8 +182,8 @@
   bottom: 0;
   background-size: cover;
   background-position: center;
-  filter: blur(0px) brightness(0.7);
-  opacity: 0.6;
+  filter: blur(0px) brightness(0.9);
+  opacity: 0.7;
 }
 
 .memory-indicator {

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import "../styles/MemoryDisplayModal.css"
-import { FaLocationPin, FaTrashCan } from "react-icons/fa6"
+import { FaArrowDown, FaLocationArrow, FaLocationCrosshairs, FaLocationDot, FaLocationPin, FaLocationPinLock, FaTrashCan } from "react-icons/fa6"
 import { FaEdit } from "react-icons/fa"
 
 const MemoryDisplayModal = ({ memory, isOpen, onClose, onEdit, onDelete }) => {
@@ -54,7 +54,10 @@ const MemoryDisplayModal = ({ memory, isOpen, onClose, onEdit, onDelete }) => {
                       }}
                     />
                   ) : (
+                    <>
+                    <h5><FaArrowDown/> Tap to play! <FaArrowDown/></h5>
                     <video src={f.url}  onLoad={() => setImageLoaded(true)} key={i} onClick={e => e.target.paused ? e.target.play() : e.target.pause()}/>
+                    </>
                   )
                 })}
 
@@ -71,7 +74,7 @@ const MemoryDisplayModal = ({ memory, isOpen, onClose, onEdit, onDelete }) => {
 
             {memory.Location && (
               <div className="memory-location">
-                <FaLocationPin />
+                <FaLocationDot />
 
                 <span>{memory.Location}</span>
               </div>
@@ -85,6 +88,10 @@ const MemoryDisplayModal = ({ memory, isOpen, onClose, onEdit, onDelete }) => {
               <div className="memory-created">
                 <span className="metadata-label">Added on:</span>
                 <span className="metadata-value">{new Date(memory.CreatedDate).toLocaleDateString()}</span>
+              </div>
+              <div className="memory-created">
+                <span className="metadata-label">Added by:</span>
+                <span className="metadata-value">{memory.CreatedBy}</span>
               </div>
             </div>
 

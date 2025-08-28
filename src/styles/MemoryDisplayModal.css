@@ -168,9 +168,10 @@
   background: #f1f5f9;
   border-radius: 16px;
   border-left: 4px solid #10b981;
+  border-right: 4px solid #10b981;
   position: relative;
 }
-
+/* 
 .memory-description p::before {
   content: '"';
   position: absolute;
@@ -189,7 +190,7 @@
   font-size: 2rem;
   color: #10b981;
   opacity: 0.3;
-}
+} */
 
 .memory-metadata {
   margin-bottom: 1.5rem;

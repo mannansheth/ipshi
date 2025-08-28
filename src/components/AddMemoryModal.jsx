@@ -6,10 +6,11 @@ import "../styles/AddMemoryModal.css"
 import { FaTrash, FaX } from "react-icons/fa6"
 import { FaSave } from "react-icons/fa"
 
-const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded }) => {  
+const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded, memory }) => {  
+
   const [formData, setFormData] = useState({
     date: selectedDate ,
-    title: "",
+    title: memory?.Title || "",
     description: "",
     imageUrl: [],
     location: "",
@@ -24,7 +25,7 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded }) => {
     if (isOpen) {
       setFormData({
         date: selectedDate || new Date().toISOString().split("T")[0],
-        title: "",
+        title: memory?.Title || "",
         description: "",
         imageUrl: [],
         location: "",
@@ -157,7 +158,7 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded }) => {
     <div className="add-memory-overlay" onClick={handleBackdropClick}>
       <div className="add-memory-container">
         <div className="add-memory-header">
-          <h2 className="add-memory-title">Create New Memory</h2>
+          <h2 className="add-memory-title">{memory?.Title ? "Update Memory" : "Create New Memory"}</h2>
           <button className="add-memory-close" onClick={onClose} aria-label="Close modal">
             <FaX />
           </button>

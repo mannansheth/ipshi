@@ -5,6 +5,7 @@ import * as memoriesService from "../services/memoriesService"
 import MemoryDisplayModal from "../components/MemoryDisplayModal"
 import AddMemoryModal from "../components/AddMemoryModal"
 import "../styles/Timeline.css"
+import { FaStar } from "react-icons/fa6"
 
 const Timeline = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -22,7 +23,6 @@ const Timeline = () => {
     const year = currentDate.getFullYear()
     const month = currentDate.getMonth()
     const monthMemories = await memoriesService.getMemoriesForMonth(year, month)
-    console.log(monthMemories)
     setMemories(monthMemories)
   }
 
@@ -61,7 +61,7 @@ const Timeline = () => {
 
   const handleMemoryEdit = (memory) => {
     setSelectedMemory(memory)
-    setSelectedDate(memory.date)
+    setSelectedDate(memory.DateOfMemory)
     setShowMemoryModal(false)
     setShowAddModal(true)
   }
@@ -156,16 +156,33 @@ const Timeline = () => {
                 <div
                   key={index}
                   className={`day-cell ${day ? "active" : "empty"} ${memory ? "has-memory" : ""}`}
+                  style={{border:((day===18) && currentDate.getMonth() === 7) ? "7px solid yellow"
+                     : 
+                     ((day===21) && currentDate.getMonth() === 9) ? "7px solid blue"
+                     :
+                     "4px transparent" }}
                   onClick={() => handleDayClick(day)}
                 >
                   {day && (
                     <>
-                    {day === 21 &&  currentDate.getMonth() === 9 && <b>SPECIAL</b>} 
-                      <span className="day-number">{day}</span>
+                      <span className={`day-number ${memory ? "has-memory" : ""}`}>
+                        {
+                          ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="yellow"/> 
+                          : 
+                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="blue"/>
+                          :
+                        ""} {day} {
+                          ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="yellow"/> 
+                          :
+                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="blue"/>
+                          :
+                          ""
+                        }
+                        </span>
                       {memory && (
-                        <div className="memory-preview">
+                        <div className="memory-preview" >
                           {memory.files && (
-                            <div className="memory-image" style={{ backgroundImage: `url(${memory.files.filter(f => f.type.includes("image"))[0].url})` }}></div>
+                            <div className="memory-image" style={{ backgroundImage: `url(${memory.files.filter(f => f.type.includes("image"))[0].url})`}}></div>
                           )}
                           {/* <div className="memory-indicator"></div> */}
                         </div>
@@ -208,6 +225,7 @@ const Timeline = () => {
           setSelectedDate(null)
           setSelectedMemory(null)
         }}
+        memory = {selectedMemory}
         selectedDate={selectedDate}
         onMemoryAdded={handleMemoryAdded}
       />
