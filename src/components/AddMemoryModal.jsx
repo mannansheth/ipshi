@@ -59,7 +59,7 @@ const AddMemoryModal = ({ isOpen, onClose, selectedDate, onMemoryAdded, memory }
   }
 
   const handleImageChange = e => {
-    const allowedExtensions = "mp4, jpg, png, webp, jpeg"
+    const allowedExtensions = "mp4, jpg, png, webp, jpeg, mov"
     setErrors(prev => ({
         ...prev,
         "imageUrl" : ""
