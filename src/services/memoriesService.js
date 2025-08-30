@@ -6,6 +6,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 export const getAllMemories = async () => {
   try {
     const memories = await axios.get(`${backendUrl}/api/memories/getMemories`)
+    console.log(memories.data);
     return memories.data || []
   } catch (error) {
     console.error("Error loading memories:", error)
