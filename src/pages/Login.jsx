@@ -14,8 +14,8 @@ const Login = () => {
     const handleSubmit = () => {
         const inpPass = document.getElementById("pass-input");
         const btn = document.getElementById("submit-btn");
-        if (inpPass.value === "Ipshi") {
-            localStorage.setItem("code", "Ipshi")
+        if (inpPass.value === "211024") {
+            localStorage.setItem("code", "211024")
             window.location.pathname = "/"
         } else {
             if (countWrong >= 4) {
@@ -44,8 +44,8 @@ const Login = () => {
         <center>
             {!isWrong ? 
             <>
-            <h2>Who's the boss: </h2>
-            <input type="password" placeholder="(the actual boss)" id='pass-input'></input>
+            <h2>Our date </h2>
+            <input type="password" placeholder="OUR DATE" id='pass-input'></input>
             <p>****5 tries only</p>
             <button onClick={handleSubmit} id="submit-btn">Submit</button>
             </>

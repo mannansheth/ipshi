@@ -5,9 +5,8 @@ import * as memoriesService from "../services/memoriesService"
 import MemoryDisplayModal from "../components/MemoryDisplayModal"
 import AddMemoryModal from "../components/AddMemoryModal"
 import "../styles/Timeline.css"
-import { FaAnglesLeft, FaAnglesRight, FaArrowLeft, FaArrowLeftLong, FaArrowRightLong, FaChevronLeft, FaStar } from "react-icons/fa6"
+import { FaAnglesLeft, FaAnglesRight, FaArrowLeftLong, FaArrowRightLong, FaStar } from "react-icons/fa6"
 import { Link } from "react-router"
-import { FaArrowCircleLeft } from "react-icons/fa"
 
 const Timeline = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -185,12 +184,12 @@ const Timeline = () => {
                         {
                           ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="gold"/> 
                           : 
-                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="white"/>
+                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="#25b8e9"/>
                           :
                         ""} <span>{day}</span> {
                           ((day===18) && currentDate.getMonth() === 7) ? <FaStar color="gold"/> 
                           :
-                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="white"/>
+                          ((day===21) && currentDate.getMonth() === 9) ? <FaStar color="#25b8e9"/>
                           :
                           ""
                         }

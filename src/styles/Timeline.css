@@ -54,10 +54,11 @@
 
 .calendar-navigation {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
-  padding: 0 1rem;
+
 }
 
 .nav-button {
@@ -101,7 +102,7 @@
 .weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1rem;
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -116,7 +117,7 @@
 .days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .day-cell {
