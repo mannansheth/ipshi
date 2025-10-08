@@ -49,7 +49,12 @@ const Home = ({isBirthdayTime, ready}) => {
             <h3>Our timeline</h3>
             <p>All our memories by date</p>
           </Link>
-          {new Date().getDate() >=18 ?
+          <Link to="/photos" className="nav-card photos-theme">
+            <div className="card-icon">📸</div>
+            <h3>Our Memories</h3>
+            <p>A film strip of our beautiful moments</p>
+          </Link>
+          {/* {new Date().getDate() >=18 ?
           <Link to="/photos" className="nav-card photos-theme">
             <div className="card-icon">📸</div>
             <h3>Our Memories</h3>
@@ -67,27 +72,13 @@ const Home = ({isBirthdayTime, ready}) => {
             <h3>Our Memories</h3>
             <p>A film strip of our beautiful moments</p>
           </div>
-        }
-          
-          {isBirthdayTime() ? 
-            <Link to="/stars" className="nav-card stars-theme">
-              <div className="card-icon">⭐</div>
-              <h3>Your Birth Sky</h3>
-              <p>The stars from August 18, 2006</p>
-            </Link>
-          :
-          <div onClick={() => {
-            setDisplayStarsError(true);
-            setTimeout(() => {
-              setDisplayStarsError(false);
-            }, 3000)
-          }
-          } className="nav-card stars-theme">
+        } */}
+          <Link to="/stars" className="nav-card stars-theme">
             <div className="card-icon">⭐</div>
             <h3>Your Birth Sky</h3>
             <p>The stars from August 18, 2006</p>
-          </div>
-          }
+          </Link>
+          
         
         </div>
         
