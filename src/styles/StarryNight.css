@@ -304,7 +304,7 @@
   filter:brightness(5);
   top:1px;
   right: 0;
-  animation: shootingStar 10s ease;
+  animation: shootingStar 5s ease;
   position:absolute;
   z-index:999;
 }
@@ -318,7 +318,7 @@
   height: 10px;
   color: rgba(198, 195, 182, 0.856);
   filter:brightness(2);
-  animation: shootingStar 20s ease-out;
+  animation: shootingStar 5s ease-out;
   background: radial-gradient(circle, gold, transparent);
   border-radius: 50%;
   box-shadow: 0 0 40px #ffd900d3;

@@ -104,7 +104,7 @@ const StarryNight = ({isBirthdayTime}) => {
           setTimeout(() => {
             setShowMessage(true);
             setShowShootingStar(false);
-          }, 20000)
+          }, 5000)
         }
       }
     }, 1000)
