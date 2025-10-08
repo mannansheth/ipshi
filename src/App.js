@@ -98,9 +98,9 @@ function App() {
   const isBirthdayTime = () => {
     const now = new Date()
       return (
-        now.getMonth() >= 7 &&
-        now.getDate() >= 18 &&
-        now.getHours() >= 1 &&
+        now.getMonth() >= 0 &&
+        now.getDate() >= 1 &&
+        now.getHours() >= 0 &&
         now.getMinutes() >= 0
       )
     }
