@@ -53,7 +53,7 @@ const Home = ({isBirthdayTime, ready}) => {
           <Link to="/valentines" className="nav-card photos-theme">
             <div className="card-icon"><FaHeart color="red" className="valentinesIcon"/></div>
             <h3>Valentines</h3>
-            <p>His and her valentines proposal</p>
+            <p>His and her valentines' proposal</p>
           </Link>
 
           <Link to="/photos" className="nav-card photos-theme">
