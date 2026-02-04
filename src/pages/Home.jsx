@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import "../styles/Home.css"
-import { FaSun } from "react-icons/fa"
+import { FaHeart, FaSun } from "react-icons/fa"
 import { FaCalendar } from "react-icons/fa6"
 
 const Home = ({isBirthdayTime, ready}) => {
@@ -49,6 +49,13 @@ const Home = ({isBirthdayTime, ready}) => {
             <h3>Our timeline</h3>
             <p>All our memories by date</p>
           </Link>
+
+          <Link to="/valentines" className="nav-card photos-theme">
+            <div className="card-icon"><FaHeart color="red" className="valentinesIcon"/></div>
+            <h3>Valentines</h3>
+            <p>His and her valentines proposal</p>
+          </Link>
+
           <Link to="/photos" className="nav-card photos-theme">
             <div className="card-icon">📸</div>
             <h3>Our Memories</h3>
@@ -100,6 +107,7 @@ const Home = ({isBirthdayTime, ready}) => {
           <p>Made with love by Mone💕</p>
         </div>
       </div>
+        
     </div>
   )
 }
