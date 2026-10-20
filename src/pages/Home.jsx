@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import "../styles/Home.css"
-import { FaHeart, FaSun } from "react-icons/fa"
+import { FaHeart, FaSun, FaFilm } from "react-icons/fa"
 import { FaCalendar } from "react-icons/fa6"
 
 const Home = ({isBirthdayTime, ready}) => {
@@ -60,6 +60,11 @@ const Home = ({isBirthdayTime, ready}) => {
             <div className="card-icon">📸</div>
             <h3>Our Memories</h3>
             <p>A film strip of our beautiful moments</p>
+          </Link>
+          <Link to="/montage" className="nav-card photos-theme">
+            <div className="card-icon"><FaFilm color="#b184a0" /></div>
+            <h3>Our little reel room</h3>
+            <p>Choose a film and replay our memories</p>
           </Link>
           {/* {new Date().getDate() >=18 ?
           <Link to="/photos" className="nav-card photos-theme">

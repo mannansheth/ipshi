@@ -12,6 +12,7 @@ import FloatingMusicWidget from "./components/FloatingMusicWidget"
 import Callback from "./pages/Callback"
 import Timeline from "./pages/Timeline"
 import Valentines from "./pages/Valentines"
+import MemoryMontage from "./pages/MemoryMontage"
 
 function App() {
   const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false);
@@ -153,6 +154,7 @@ function App() {
           <Route path="*" element = {<Login />}/>
           <Route path='/card' element={<BirthdayCard /> } />
           <Route path='/valentines' element={<Valentines /> } />
+          <Route path='/montage' element={<MemoryMontage /> } />
         </Routes>
         
         {window.location.pathname !== '/login' && (
