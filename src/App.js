@@ -17,7 +17,7 @@ import MemoryMontage from "./pages/MemoryMontage"
 function App() {
   const [isMusicPlayerOpen, setIsMusicPlayerOpen] = useState(false);
   const [provider, setProvider] = useState(null);
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(false); 
   const [currentSongData, setCurrentSongData] = useState({});
   const lastFetchedTrackIdRef = useRef(null);
   const playerRef = useRef(null);
